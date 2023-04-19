@@ -13,10 +13,11 @@ class Routeur
     // uri, classe, méthode
     // --------------------
     ["",              "Frontend",    "pageAcceuil"],
-    ["utilisateur",   "Utilisateur",    "gererUtilisateur"],
-    ["inscription",   "Frontend",    "inscription"],
-    ['connexion',     'Frontend',    'connexion'],
-    ['deconnexion',   'Frontend',    'deconnexion']
+    ["#",              "Frontend",    "pageAcceuil"],
+    ["utilisateur",   "Utilisateur",    "connexion"],
+    ["utilisateur/inscription",   "Utilisateur",    "inscription"],
+    ['connexion',     'Utilisateur',    'connexion'],
+    ['deconnexion',   'Utilisateur',    'deconnexion']
   ];
 
   protected $oRequetesSQL; // objet RequetesSQL utilisé par tous les contrôleurs

@@ -4,7 +4,7 @@
  * Classe de l'entité Utilisateur
  *
  */
-class Utilisateur
+class UtilisateurModele
 {
     private $utilisateurid;
     private $nom;
