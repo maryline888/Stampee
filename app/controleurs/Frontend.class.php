@@ -19,29 +19,49 @@ class Frontend extends Routeur
   public function __construct()
   {
     $this->oUtilConn = $_SESSION['oUtilConn'] ?? null;
-    // $this->film_id = $_GET['film_id'] ?? null;
     $this->oRequetesSQL = new RequetesSQL;
   }
+
+  /**
+   * Lister les films diffusés prochainement
+   * 
+   */
+  public function pageAcceuil()
+  {
+    new Vue(
+      "vPageAcceuil",
+      array(
+        'oUtilConn' => $this->oUtilConn,
+        'titre'  => "Stampee",
+
+      ),
+      "gabarit-frontend"
+    );
+  }
+
+
   /**
    * Connecter un utilisateur
    */
-  public function connecter()
-  {
-    $utilisateur = $this->oRequetesSQL->connecter($_POST);
-    if ($utilisateur !== false) {
-      $_SESSION['oUtilConn'] = new Utilisateur($utilisateur);
-    }
-    echo json_encode($utilisateur);
-  }
+  // public function connecter()
+  // {
+  //   $utilisateur = $this->oRequetesSQL->connecter($_POST);
+  //   if ($utilisateur !== false) {
+  //     $_SESSION['oUtilConn'] = new Utilisateur($utilisateur);
+  //   }
+  //   echo json_encode($utilisateur);
+  // }
 
   /**
    * Déconnecter un utilisateur
    */
-  public function deconnecter()
-  {
-    unset($_SESSION['oUtilConn']);
-    echo json_encode(true);
-  }
+  // public function deconnecter()
+  // {
+  //   unset($_SESSION['oUtilConn']);
+  //   echo json_encode(true);
+  // }
+
+
 
   /**
    * Lister les ENCHÈRES 

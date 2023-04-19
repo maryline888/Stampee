@@ -1,0 +1,66 @@
+:root {
+    /*============================ */
+    /* = couleurs */
+    /*============================ */
+    --bleu: #031839;
+    --rouge: #7d0c04;
+    --jaune: #f9cf3a;
+    --gris-pale: #E7eaef;
+    --gris-fonce: #a0a3a8;
+    --blanc: #fff;
+    --noir: #000;
+
+    --border-radius: 5px;
+
+    /*============================ */
+    /* = espacement */
+    /*============================ */
+    --espacement-pico: 0.1rem;
+    --espacement-nano: 0.3rem;
+    --espacement-micro: .5rem;
+    /*--- */
+    --espacement-thinnest: 1rem;
+    --espacement-thinner: 1.5rem;
+    --espacement-thin: 2rem;
+    --espacement-broad: 4rem;
+    --espacement-broader: 6rem;
+    --espacement-broadest: 8rem;
+    --espacement-large: 10rem;
+    --espacement-larger: 12rem;
+    --espacement-largest: 16rem;
+    /*--- */
+    --espacement-mega: 24rem;
+    --espacement-giga: 54rem;
+    --espacement-tera: 78rem;
+
+
+    /*========================= */
+    /* = FONT-SIZE */
+    /*========================= */
+    --font-miniature: 10px;
+    --font-shortest: 12px;
+    --font-shorter: 14px;
+    --font-short: 15px;
+    --font-current: 16px;
+    --font-current-plus: 18px;
+    --font-tall: 21px;
+    --font-taller: 32px;
+    --font-tallest: 38px;
+    --font-huge: 46px;
+    --font-huger: 80px;
+    --font-hugest: 80px;
+    --font-giant: 120px;
+
+    /*========================= */
+    /* = LINE-HEIGHT */
+    /*========================= */
+    --line-height-perfect: 1em;
+    --line-height-compressed: 1.0em;
+    --line-height-tightest: 1.26875em;
+    --line-height-tighter: 1.62875em;
+    --line-height-tight: 1.74285em;
+    --line-height-normal: 2.375em;
+    --line-height-loose: 3.6em;
+    --line-height-looser: 4.2em;
+    --line-height-loosest: 5.0em;
+}

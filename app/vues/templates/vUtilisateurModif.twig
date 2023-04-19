@@ -1,8 +1,7 @@
-<section class="section-ajout">
+<section>
 	<h1>{{ titre|upper }}</h1>
 
-	<form class="form-ajout" method="POST" action="admin?entite=utilisateur&action=a">
-
+	<form method="POST" action="admin?entite=utilisateur&action=m&utilisateur_id={{ utilisateur.utilisateur_prenom }} {{utilisateur.utilisateur_nom}}">
 		<label>Nom</label>
 		<input name="utilisateur_nom" value="{{ utilisateur.utilisateur_nom }}">
 		<span>&nbsp;{{ erreurs.utilisateur_nom }}</span>
@@ -19,15 +18,18 @@
 		<input name="utilisateur_courriel" value="{{ utilisateur.utilisateur_courriel }}">
 		<span>&nbsp;{{ erreurs.utilisateur_courriel }}</span>
 
-		<label>Mots de passe</label>
-		<input name="utilisateur_mdp" value="{{ utilisateur.utilisateur_mdp }}">
-		<span>&nbsp;{{ erreurs.utilisateur_mdp }}</span>
-
-		<select name="role_id" value="{{ utilisateur.role_id }}">
-			<option value="2">Client</option>
-			<option value="1">Administrateur</option>
-		</select>
-
+		{# <label>Profil</label>
+												<select name="role_id">
+													{% if utilisateur.role_id == "client" %}
+														<option selected value="client">Client</option>
+										
+													{% elseif utilisateur.role_id == "administrateur" %}
+														<option value="2">Client</option>
+														<option selected value="1">Administrateur</option>
+													</select>
+												{% endif %} #}
+		{# <span>&nbsp;{{ erreurs.role_id }}</span> #}
+		<input type="hidden" name="utilisateur_id" value="{{ utilisateur.utilisateur_id }}">
 		<input type="submit" value="Envoyer">
 	</form>
 </section>

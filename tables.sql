@@ -40,24 +40,6 @@ CREATE TABLE TIMBRE (
   PRIMARY KEY (timbre_id)
 );
 
--- CREATE TABLE UTILISATEUR (
---   utilisateur_id SMALLINT UNSIGNED AUTO_INCREMENT,
---   utilisateur_nom VARCHAR (50) NOT NULL,
---   utilisateur_prenom VARCHAR (50) NOT NULL,
---   utilisateur_courriel VARCHAR (100) NOT NULL,
---   utilisateur_mdp VARCHAR (255) NOT NULL,
---   utilisateur_adresse VARCHAR (50) NOT NULL,
---   role_id VARCHAR(20) ,
---   PRIMARY KEY (utilisateur_id),
---   FOREIGN KEY (role_id) REFERENCES ROLE (role_id)
--- );
-
--- CREATE TABLE ROLE(
---   role_id VARCHAR(20) ,
---   nom VARCHAR(50) NOT NULL,
---   PRIMARY KEY (role_id)
--- );
-
 CREATE TABLE ETAT(
   etat_id SMALLINT UNSIGNED AUTO_INCREMENT,
   nom VARCHAR(50) NOT NULL,
@@ -90,8 +72,6 @@ CREATE TABLE MISE (
 
 -- =========================================================== -- 
 
-
-
 CREATE TABLE UTILISATEUR (
   utilisateur_id SMALLINT UNSIGNED AUTO_INCREMENT,
   utilisateur_nom VARCHAR (50) NOT NULL,
@@ -115,3 +95,15 @@ INSERT INTO `UTILISATEUR` (`utilisateur_id`, `utilisateur_nom`, `utilisateur_pre
 (2, 'Cartier', 'Jean', 'jeancartier@mail.ca', 'fb86376cb7bfd6553d365f1e9da9886c18d2b3adc19016202d0e32457e145d2b43cefeb08b3a871bc336048e1d62db32d88f3ad21d7231dc48922836bdb41855', '111 jeantalon montreal qc can ', 2);
 -- Exemple d'insertion des rôles "client" et "administrateur" dans la table ROLE
 INSERT INTO ROLE (role_id, nom) VALUES ('client', 'client'), ('administrateur', 'administrateur');
+
+
+
+
+-- ==================== -- 
+-- utilisateur et mots de passe : 
+
+-- test@test.ca
+-- a1b2c3d4e5
+
+-- ella@elle.ca
+-- A1b2c3d4e5!

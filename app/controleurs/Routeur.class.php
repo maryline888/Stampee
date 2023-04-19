@@ -12,12 +12,11 @@ class Routeur
   private $routes = [
     // uri, classe, méthode
     // --------------------
-    ["admin",         "Admin",    "gererAdmin"],
-    // ["",              "Frontend", "listerAlaffiche"],
-    // ["prochainement", "Frontend", "listerProchainement"],
-    // ["film",          "Frontend", "voirFilm"],
-    ['connecter',     'Frontend', 'connecter'],
-    ['deconnecter',   'Frontend', 'deconnecter']
+    ["",              "Frontend",    "pageAcceuil"],
+    ["utilisateur",   "Utilisateur",    "gererUtilisateur"],
+    ["inscription",   "Frontend",    "inscription"],
+    ['connexion',     'Frontend',    'connexion'],
+    ['deconnexion',   'Frontend',    'deconnexion']
   ];
 
   protected $oRequetesSQL; // objet RequetesSQL utilisé par tous les contrôleurs

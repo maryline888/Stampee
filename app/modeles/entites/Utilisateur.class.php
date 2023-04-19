@@ -160,7 +160,6 @@ class Utilisateur
      * @return $this
      */
     public function setUtilisateur_mdp($utilisateur_mdp)
-
     {
         unset($this->erreurs['utilisateur_mdp']);
         $utilisateur_mdp = trim($utilisateur_mdp);
@@ -174,7 +173,6 @@ class Utilisateur
 
 
     public function setUtilisateur_adresse($utilisateur_adresse)
-
     {
         unset($this->erreurs['utilisateur_adresse']);
         $utilisateur_adresse = trim($utilisateur_adresse);
