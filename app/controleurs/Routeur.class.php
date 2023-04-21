@@ -18,7 +18,7 @@ class Routeur
     ["utilisateurInscription", "Utilisateur",    "inscription"],
     ['utilisateurDeconnexion', "Utilisateur",    "deconnexion"],
     // ['modifier&utilisateur_id=',   'Utilisateur',    'modifier'],
-    ["enchere/ajout",   "Enchere",    "ajout"],
+    ["enchereAjout",   "Enchere",    "ajout"],
     // ['profil',        'Utilisateur',    'getProfil']
   ];
 

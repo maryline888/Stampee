@@ -142,10 +142,6 @@ class Utilisateur extends Routeur
       //$utilisateur = $this->oRequetesSQL->getUtilisateur($this->utilisateur_id);
     }
     $this->oUtilConn = $_SESSION['oUtilConn'];
-    // echo '<pre>';
-
-    // print_r($this->oUtilConn);
-
 
     new Vue(
       'vUtilisateur',

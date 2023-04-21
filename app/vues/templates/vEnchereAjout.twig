@@ -1,0 +1,16 @@
+<h1>Plateforme d'enchère</h1>
+<form
+	action="" method="POST" enctype="multipart/form-data">
+
+	{# ================ #}
+	<label>Date de création</label>
+
+	<label>Nom du timbre</label>
+	<label>Couleur</label>
+	<label>Pays d'origine du timbre</label>
+	<input name="utilisateur_nom" value="{{ oUtilConn.utilisateur_nom }}">
+	<span>&nbsp;{{ erreurs.utilisateur_nom }}</span>
+	<input type="submit" name="enchere" value="entrer">
+
+
+</form>

@@ -1584,3 +1584,35 @@ select {
 }
 
 /* Fin form catalogue */
+
+
+/* début vUtilisateur*/
+
+.utilisateur-ajout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gris-pale);
+    margin-top: 20px;
+}
+
+.section-ajout {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.section-ajout h1 {
+    text-align: center;
+}
+
+.form-ajout {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* gap: 20px; */
+    /* width: 50%; */
+    align-items: center;
+    justify-content: center;
+}
