@@ -1,0 +1,31 @@
+<script>
+	history.pushState({}, '', 'utilisateur')
+</script>
+<section>
+	<h1>{{ titre|upper }}</h1>
+
+	<h2>
+		Bonjour
+		{{ oUtilConn.utilisateur_prenom }}
+		{{ oUtilConn.utilisateur_nom }}
+
+	</h2>
+	{# {% if oUtilConn.role_id == 1 %}
+				
+						<a href="">Ajouter un utilisateur</a>
+					{% endif %} #}
+	<p class="messageRetourAction {{ classRetour }}">{{ messageRetourAction }}&nbsp;</p>
+	<div class="utilisateurs">
+		<h3>Informations personnelles :
+		</h3>
+
+		<h4>Courriel</h4><br>
+		<p>{{ oUtilConn.utilisateur_courriel }}</p>
+		<h4>Adresse</h4><br>
+		<p>{{ oUtilConn.utilisateur_adresse }}</p>
+		<a class="btn" href="modifier">Modifier mon profil</a><br>
+		<a class="btn" href="supprimer {{ oUtilConn.utilisateur_id }}">Supprimer mon profil</a>
+
+
+	</div>
+</div></div></section>{{ include("modaleSuppression.twig") }}

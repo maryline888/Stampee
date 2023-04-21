@@ -6,12 +6,12 @@
  */
 class UtilisateurModele
 {
-    private $utilisateurid;
-    private $nom;
-    private $prenom;
-    private $courriel;
-    private $adresse;
-    private $mdp;
+    private $utilisateur_id;
+    private $utilisateur_nom;
+    private $utilisateur_prenom;
+    private $utilisateur_courriel;
+    private $utilisateur_adresse;
+    private $utilisateur_mdp;
     private $role_id;
 
     private $erreurs = [];
@@ -50,43 +50,46 @@ class UtilisateurModele
     }
 
     // getters pour exploitation necessaire a twig
-    public function getUtilisateurid()
+    public function getUtilisateur_id()
     {
-        return $this->utilisateurid;
+        return $this->utilisateur_id;
     }
 
-    public function getUtilisateurnom()
+    public function getUtilisateur_nom()
     {
-        return $this->nom;
+        return $this->utilisateur_nom;
     }
 
-    public function getUtilisateurprenom()
+    public function getUtilisateur_prenom()
     {
-        return $this->uprenom;
+        return $this->utilisateur_prenom;
     }
 
-    public function getUtilisateurcourriel()
+    public function getUtilisateur_courriel()
     {
-        return $this->courriel;
-    }
-    public function getUtilisateuradresse()
-    {
-        return $this->adresse;
+        return $this->utilisateur_courriel;
     }
 
-    public function getUtilisateurmdp()
+    public function getUtilisateur_adresse()
     {
-        return $this->mdp;
+        return $this->utilisateur_adresse;
     }
 
-    public function getUtilisateurroleid()
+    public function getUtilisateur_mdp()
+    {
+        return $this->utilisateur_mdp;
+    }
+
+    public function getUtilisateur_roleid()
     {
         return $this->role_id;
     }
+
     public function getErreurs()
     {
         return $this->erreurs;
     }
+
 
 
 
@@ -97,7 +100,7 @@ class UtilisateurModele
      */
     public function setUtilisateur_id($utilisateurid)
     {
-        $this->utilisateurid = $utilisateurid; //doit etre complété par les controles nécessaires à la saisie
+        $this->utilisateur_id = $utilisateurid; //doit etre complété par les controles nécessaires à la saisie
     }
 
     /**
@@ -195,17 +198,10 @@ class UtilisateurModele
      */
     public function setRole_id($role_id)
     {
-        $this->role_id = $role_id;
-    }
 
-    /**
-     * Génération d'un mot de passe aléatoire dans la propriété utilisateurmdp
-     * @return $this
-     */
-    // public function genererMdp()
-    // {
-    //     $mdp = "!a2Rt67&qsd"; // à remplacer par une génération aléatoire
-    //     $this->utilisateurmdp = $mdp;
-    //     return $this;
-    // }
+        unset($this->erreurs['utilisateur.role_id']);
+        $role_id = intval($role_id);
+        $this->role_id = $role_id;
+        return $this;
+    }
 }

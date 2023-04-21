@@ -12,12 +12,14 @@ class Routeur
   private $routes = [
     // uri, classe, méthode
     // --------------------
-    ["",              "Frontend",    "pageAcceuil"],
-    ["#",              "Frontend",    "pageAcceuil"],
-    ["utilisateur",   "Utilisateur",    "connexion"],
-    ["utilisateur/inscription",   "Utilisateur",    "inscription"],
-    ['connexion',     'Utilisateur',    'connexion'],
-    ['deconnexion',   'Utilisateur',    'deconnexion']
+    ["",                        "Frontend",       "pageAcceuil"],
+    ["#",                       "Frontend",       "pageAcceuil"],
+    ["utilisateurConnexion",   "Utilisateur",    "connexion"],
+    ["utilisateurInscription", "Utilisateur",    "inscription"],
+    ['utilisateurDeconnexion', "Utilisateur",    "deconnexion"],
+    // ['modifier&utilisateur_id=',   'Utilisateur',    'modifier'],
+    ["enchere/ajout",   "Enchere",    "ajout"],
+    // ['profil',        'Utilisateur',    'getProfil']
   ];
 
   protected $oRequetesSQL; // objet RequetesSQL utilisé par tous les contrôleurs

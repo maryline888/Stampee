@@ -17,6 +17,7 @@ class RequetesSQL extends RequetesPDO
    */
   public function connecter($champs)
   {
+
     $this->sql = "
       SELECT *
       FROM utilisateur
@@ -31,9 +32,20 @@ class RequetesSQL extends RequetesPDO
    */
   public function ajouterUtilisateur($champs)
   {
+    // var_dump($champs);
+    // print_r($champs);
+    // die();
     $this->sql = '
-    INSERT INTO utilisateur SET utilisateur_nom = :utilisateur_nom, utilisateur_prenom = :utilisateur_prenom, 
-    utilisateur_courriel = :utilisateur_courriel, utilisateur_adresse = :utilisateur_adresse, role_id = :role_id, utilisateur_mdp = SHA2(:utilisateur_mdp, 512)';
+    INSERT INTO utilisateur 
+    SET utilisateur_nom = :utilisateur_nom, 
+    utilisateur_prenom = :utilisateur_prenom, 
+    utilisateur_courriel = :utilisateur_courriel, 
+    utilisateur_mdp = SHA2(:utilisateur_mdp, 512),
+    utilisateur_adresse = :utilisateur_adresse,
+    role_id = :role_id';
+    // var_dump($champs);
+    // var_dump($this->CUDLigne($champs));
+    //die();
     return $this->CUDLigne($champs);
   }
 
@@ -46,7 +58,7 @@ class RequetesSQL extends RequetesPDO
   public function modifierUtilisateur($champs)
   {
     $this->sql = '
-      UPDATE utilisateur SET utilisateur_nom = :utilisateur_nom, utilisateur_prenom = :utilisateur_prenom
+      UPDATE utilisateur SET utilisateur_nom = :utilisateur_nom, utilisateur_prenom = :utilisateur_prenom, utilisateur_courriel = :utilisateur_courriel, utilisateur_adresse =  :utilisateur_adresse
       WHERE utilisateur_id = :utilisateur_id';
     return $this->CUDLigne($champs);
   }
@@ -75,10 +87,11 @@ class RequetesSQL extends RequetesPDO
   public function getUtilisateur($utilisateur_id)
   {
     $this->sql = "
-      SELECT *
+      SELECT utilisateur_nom, utilisateur_prenom, utilisateur_courriel, utilisateur.role_id
       FROM utilisateur
+      JOIN ROLE ON utilisateur.role_id = role.role_id
       WHERE utilisateur_id = :utilisateur_id";
-    return $this->getLignes(['utilisateur_id' => $utilisateur_id], RequetesPDO::UNE_SEULE_LIGNE);
+    return $this->getLignes();
   }
 }
 

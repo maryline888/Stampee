@@ -1,35 +1,35 @@
 <section>
 	<h1>{{ titre|upper }}</h1>
 
-	<form method="POST" action="admin?entite=utilisateur&action=m&utilisateur_id={{ utilisateur.utilisateur_prenom }} {{utilisateur.utilisateur_nom}}">
+	<form method="POST" action="modifier&utilisateur_id={{ oUtilConn.utilisateur_prenom }} {{oUtilConn.utilisateur_nom}}">
 		<label>Nom</label>
-		<input name="utilisateur_nom" value="{{ utilisateur.utilisateur_nom }}">
+		<input name="utilisateur_nom" value="{{ oUtilConn.utilisateur_nom }}">
 		<span>&nbsp;{{ erreurs.utilisateur_nom }}</span>
 
 		<label>Prénom</label>
-		<input name="utilisateur_prenom" value="{{ utilisateur.utilisateur_prenom }}">
+		<input name="utilisateur_prenom" value="{{ oUtilConn.utilisateur_prenom }}">
 		<span>&nbsp;{{ erreurs.utilisateur_prenom }}</span>
 
 		<label>Adresse</label>
-		<input name="utilisateur_adresse" value="{{ utilisateur.utilisateur_adresse }}">
+		<input name="utilisateur_adresse" value="{{ oUtilConn.utilisateur_adresse }}">
 		<span>&nbsp;{{ erreurs.utilisateur_adresse }}</span>
 
 		<label>Courriel</label>
-		<input name="utilisateur_courriel" value="{{ utilisateur.utilisateur_courriel }}">
+		<input name="utilisateur_courriel" value="{{ oUtilConn.utilisateur_courriel }}">
 		<span>&nbsp;{{ erreurs.utilisateur_courriel }}</span>
 
 		{# <label>Profil</label>
-												<select name="role_id">
-													{% if utilisateur.role_id == "client" %}
-														<option selected value="client">Client</option>
-										
-													{% elseif utilisateur.role_id == "administrateur" %}
-														<option value="2">Client</option>
-														<option selected value="1">Administrateur</option>
-													</select>
-												{% endif %} #}
+																<select name="role_id">
+																	{% if utilisateur.role_id == "client" %}
+																		<option selected value="client">Client</option>
+														
+																	{% elseif utilisateur.role_id == "administrateur" %}
+																		<option value="2">Client</option>
+																		<option selected value="1">Administrateur</option>
+																	</select>
+																{% endif %} #}
 		{# <span>&nbsp;{{ erreurs.role_id }}</span> #}
-		<input type="hidden" name="utilisateur_id" value="{{ utilisateur.utilisateur_id }}">
+		<input type="hidden" name="utilisateur_id" value="{{ oUtilConn.utilisateur_id }}">
 		<input type="submit" value="Envoyer">
 	</form>
 </section>

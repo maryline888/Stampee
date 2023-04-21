@@ -1,33 +1,29 @@
-<section class="section-ajout">
+<section class="utilisateur-ajout">
 	<h1>{{ titre|upper }}</h1>
 
-	<form class="form-ajout" method="POST" action="admin?entite=utilisateur&action=a">
+	<form class="form-ajout" method="POST" action="">
 
 		<label>Nom</label>
-		<input name="utilisateur_nom" value="{{ utilisateur.utilisateur_nom }}">
+		<input name="utilisateur_nom" value="{{ oUtilConn.utilisateur_nom }}">
 		<span>&nbsp;{{ erreurs.utilisateur_nom }}</span>
 
 		<label>Prénom</label>
-		<input name="utilisateur_prenom" value="{{ utilisateur.utilisateur_prenom }}">
+		<input name="utilisateur_prenom" value="{{ oUtilConn.utilisateur_prenom }}">
 		<span>&nbsp;{{ erreurs.utilisateur_prenom }}</span>
 
 		<label>Adresse</label>
-		<input name="utilisateur_adresse" value="{{ utilisateur.utilisateur_adresse }}">
+		<input name="utilisateur_adresse" value="{{ oUtilConn.utilisateur_adresse }}">
 		<span>&nbsp;{{ erreurs.utilisateur_adresse }}</span>
 
 		<label>Courriel</label>
-		<input name="utilisateur_courriel" value="{{ utilisateur.utilisateur_courriel }}">
+		<input name="utilisateur_courriel" value="{{ oUtilConn.utilisateur_courriel }}">
 		<span>&nbsp;{{ erreurs.utilisateur_courriel }}</span>
 
 		<label>Mots de passe</label>
-		<input name="utilisateur_mdp" value="{{ utilisateur.utilisateur_mdp }}">
+		<input name="utilisateur_mdp" value="{{ oUtilConn.utilisateur_mdp }}">
 		<span>&nbsp;{{ erreurs.utilisateur_mdp }}</span>
 
-		{# <select name="role_id" value="{{ utilisateur.role_id }}">
-					<option value="2">Client</option>
-					<option value="1">Administrateur</option>
-				</select> #}
+		<input name="role_id" value="2" type="hidden"></input>
 
-		<input type="submit" value="Envoyer">
-	</form>
-</section>
+	<input type="submit" value="Envoyer">
+</form></section>
