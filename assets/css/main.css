@@ -1611,8 +1611,17 @@ select {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    /* gap: 20px; */
+    gap: 20px;
     /* width: 50%; */
     align-items: center;
     justify-content: center;
+}
+
+.form-ajout select {
+    width: 25%;
+}
+
+.form-ajout input {
+
+    padding: 20;
 }

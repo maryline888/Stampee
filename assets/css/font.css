@@ -53,3 +53,7 @@ p {
 a:hover {
     color: var(--jaune-fonce);
 }
+
+.small {
+    font-size: 12px;
+}
