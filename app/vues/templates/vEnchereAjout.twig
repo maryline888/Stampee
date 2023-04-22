@@ -1,28 +1,30 @@
-<section class="section-ajout">
-	<h1>Plateforme d'enchère</h1>
-	{# sois on laisse action vide et ca retournera dans la fonction ajout de la classe enchere
-					    sois on ajoute un traitement.php #}
+<section class="section-enchere">
+	<form class="form-enchere" action="" method="POST" enctype="multipart/form-data">
+		<h1>Plateforme d'enchère</h1>
+		{# sois on laisse action vide et ca retournera dans la fonction ajout de la classe enchere
+																					    sois on ajoute un traitement.php #}
 
-
-	<form class="form-ajout" action="" method="POST" enctype="multipart/form-data">
 
 		{# ======= ENCHERE ========= #}
-		{# <label>Date de création</label>
-										                                              insérer la date du jour ? #}
-			<label>
-		Date pour la fin de l'enchère
-		</label>
-		<input name="date_fin" value="{{ oEnchere.date_fin }}"> <label>Prix de base pour votre enchère</label>
+		<label for="date_debut">Date pour la fin de l'enchère</label>
+		<input type="date" id="date_debut" name="date_debut" value="{{ oEnchere.date_debut }}">
+
+
+		<label for="date_fin">Date pour la fin de l'enchère</label>
+		<input type="date" id="date_fin" name="date_fin" value="{{ oEnchere.date_fin }}">
+
+		<label>Prix de base pour votre enchère</label>
 		<input name="prix_plancher" value="{{ oEnchere.prix_plancher }}">
 
 
 		<input type="hidden" name="coup_de_coeur_lord" value="0">
-		<input
-		type="hidden" name="archive" value="0">
+
+		<input type="hidden" name="archive" value="0">
+		<span></span>
 
 
 		{# ======= TIMBRES ========= #}
-		<h1>Informations concernant votre timbre</h1>
+		<h1 class="">Informations concernant votre timbre</h1>
 
 		<label>Nom</label>
 		<input type="text" name="nom" value="{{ oEnchere.nom }}">
@@ -51,7 +53,7 @@
 		<label for="certifie">Est-ce qu'il est certifié?</label>
 		<select id="certifie" name="certifie">
 			<option value="true">Oui</option>
-			<option value="flase">Non</option>
+			<option value="flase" selected>Non</option>
 		</select>
 		<span>&nbsp;{{ oEnchere.certifie}}</span>
 
@@ -72,6 +74,6 @@
 
 		<input name="userfile" type="file"/>
 
-		<input class="btn-lien" type="submit" name="enchere" value="Mettre en ligne mon enchère">
+		<input class="btn-lien" type="submit" name="" value="Mettre en ligne mon enchère">
 	</form>
 </section>

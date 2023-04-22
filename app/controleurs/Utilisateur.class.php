@@ -35,10 +35,6 @@ class Utilisateur extends Routeur
     if (count($_POST) !== 0) {
       $utilisateur = $_POST;
 
-      // '<pre>';
-      // print_r($_POST);
-      // die();
-
       $oUtilisateur = new UtilisateurModele($utilisateur); // création d'un objet Utilisateur pour contrôler la saisie
       $erreurs = $oUtilisateur->erreurs;
       if (count($erreurs) === 0) { // aucune erreur de saisie -> requête SQL d'ajout

@@ -1597,14 +1597,27 @@ select {
     margin-top: 20px;
 }
 
-.section-ajout {
+.section-ajout,
+.section-enchere {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    font-family: 'Montserrat', sans-serif;
+
+
 
 }
 
-.section-ajout h1 {
-    text-align: center;
+.section-ajout h1,
+.section-enchere h1 {
+    margin-bottom: 20px;
+    font-size: var(--font-tall);
+}
+
+.section-enchere h1::after {
+    margin: 20px;
 }
 
 .form-ajout {
@@ -1612,11 +1625,12 @@ select {
     flex-direction: column;
     flex-wrap: wrap;
     gap: 20px;
-    /* width: 50%; */
     align-items: center;
     justify-content: center;
 }
 
+
+.form-ajout input[type='date'],
 .form-ajout select {
     width: 25%;
 }
@@ -1624,4 +1638,41 @@ select {
 .form-ajout input {
 
     padding: 20;
+}
+
+
+
+
+/* section du formulaire denchaire  */
+
+
+.form-enchere {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* gap: 20px; */
+    padding: 40px;
+    align-items: left;
+    justify-content: left;
+    border: 1px solid black;
+
+}
+
+.form-enchere input {
+    width: 33%;
+    margin-bottom: 20px;
+    padding: .5em;
+    border-color: var(--gris-fonce);
+    border: .5px solid;
+    border-radius: 8px;
+
+}
+
+.form-enchere label {
+
+    margin-bottom: .55em;
+}
+
+.form-enchere select {
+    width: max-content;
 }

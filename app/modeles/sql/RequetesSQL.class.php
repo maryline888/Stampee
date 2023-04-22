@@ -89,4 +89,25 @@ class RequetesSQL extends RequetesPDO
       WHERE utilisateur_id = :utilisateur_id";
     return $this->getLignes();
   }
+  // =========================================
+
+  /**
+   * 
+   */
+  public function ajouterEnchere($champs)
+  {
+
+    var_dump('sql', $champs);
+
+    $this->sql = '
+      INSERT INTO ENCHERE 
+      SET date_debut = :date_debut, 
+      date_fin = :date_fin, 
+      prix_plancher = :prix_plancher, 
+      coup_de_coeur_lord = :coup_de_coeur_lord,
+      timbre_id = :timbre_id,
+      archive = :archive';
+
+    return $this->CUDLigne($champs);
+  }
 }
