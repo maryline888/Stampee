@@ -1597,6 +1597,7 @@ select {
     margin-top: 20px;
 }
 
+.section-connexion,
 .section-ajout,
 .section-enchere {
     display: flex;
@@ -1610,6 +1611,8 @@ select {
 
 }
 
+
+.section-connexion,
 .section-ajout h1,
 .section-enchere h1 {
     margin-bottom: 20px;
@@ -1620,7 +1623,8 @@ select {
     margin: 20px;
 }
 
-.form-ajout {
+.form-ajout,
+.form-connexion {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;

@@ -37,4 +37,12 @@ class Frontend extends Routeur
       "gabarit-frontend"
     );
   }
+  /**
+   * Déconnecter un utilisateur
+   */
+  public function deconnexion()
+  {
+    unset($_SESSION['oUtilConn']);
+    echo json_encode('true');
+  }
 }

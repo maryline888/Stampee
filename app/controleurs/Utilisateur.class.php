@@ -123,13 +123,13 @@ class Utilisateur extends Routeur
   {
     unset($_SESSION['oUtilConn']);
     $this->connexion();
-    new Vue(
-      'vPageAcceuil',
-      array(
-        'actionUri'              => 'deconnexion',
-      ),
-      'gabarit-frontend'
-    );
+    // new Vue(
+    //   'vPageAcceuil',
+    //   array(
+    //     //  'actionUri'              => 'deconnexion',
+    //   ),
+    //   'gabarit-frontend'
+    // );
   }
 
   public function getProfil()
@@ -184,7 +184,7 @@ class Utilisateur extends Routeur
       'vUtilisateurModif',
       array(
         'titre'     => 'modifier votre profil',
-        'actionUri'              => 'deconnexion',
+        //  'actionUri'              => 'deconnexion',
 
         'oUtilConn' => $this->oUtilConn,
       ),

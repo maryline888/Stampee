@@ -97,7 +97,7 @@ class RequetesSQL extends RequetesPDO
   public function ajouterEnchere($champs)
   {
 
-    var_dump('sql', $champs);
+    // var_dump('sql', $champs);
 
     $this->sql = '
       INSERT INTO ENCHERE 
@@ -105,8 +105,24 @@ class RequetesSQL extends RequetesPDO
       date_fin = :date_fin, 
       prix_plancher = :prix_plancher, 
       coup_de_coeur_lord = :coup_de_coeur_lord,
-      timbre_id = :timbre_id,
       archive = :archive';
+
+    return $this->CUDLigne($champs);
+  }
+
+  public function ajouterTimbre($champs)
+  {
+
+    $this->sql = '
+      INSERT INTO TIMBRE
+      SET nom = :nom,
+      date_creation = :date_creation,
+      couleur = :couleur,
+      pays_origine =:pays_origine,
+      tirage = :tirage,
+      dimensions = :dimensions,
+      certifie = :certifie,
+      etat = :etat';
 
     return $this->CUDLigne($champs);
   }

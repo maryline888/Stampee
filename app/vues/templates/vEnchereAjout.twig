@@ -2,7 +2,7 @@
 	<form class="form-enchere" action="" method="POST" enctype="multipart/form-data">
 		<h1>Plateforme d'enchère</h1>
 		{# sois on laisse action vide et ca retournera dans la fonction ajout de la classe enchere
-																					    sois on ajoute un traitement.php #}
+																																											    sois on ajoute un traitement.php #}
 
 
 		{# ======= ENCHERE ========= #}
@@ -27,35 +27,39 @@
 		<h1 class="">Informations concernant votre timbre</h1>
 
 		<label>Nom</label>
-		<input type="text" name="nom" value="{{ oEnchere.nom }}">
+		<input type="text" name="nom" value="{{ oTimbre.nom }}">
 
 
 		<label>Couleur</label>
-		<input type="text" name="couleur" value="{{ oEnchere.couleur }}">
+		<input type="text" name="couleur" value="{{ oTimbre.couleur }}">
 
 
 		<label>Pays d'origine</label>
-		<input type="text" name="pays_origine" value="{{ oEnchere.pays_origine }}">
+		<input type="text" name="pays_origine" value="{{ oTimbre.pays_origine }}">
+
+		<label>Année
+		</label>
+		<input type="text" name="date_creation" value="{{ oTimbre.date_creation }}">
 
 
 		<label>Tirage
 			<span class="small">optionnel</span>
 		</label>
-		<input type="text" name="pays_origine" value="{{ oEnchere.tirage }}">
+		<input type="text" name="tirage" value="{{ oTimbre.tirage }}">
 
 
 		<label>Quelles sont ses dimensions?
 			<span class="small">en mm</span>
 		</label>
-		<input type="text" name="dimensions" value="{{ oEnchere.dimensions }}">
+		<input type="text" name="dimensions" value="{{ oTimbre.dimensions }}">
 
 
 		<label for="certifie">Est-ce qu'il est certifié?</label>
 		<select id="certifie" name="certifie">
 			<option value="true">Oui</option>
-			<option value="flase" selected>Non</option>
+			<option value="false" selected>Non</option>
 		</select>
-		<span>&nbsp;{{ oEnchere.certifie}}</span>
+		<span>&nbsp;{{ oTimbre.certifie}}</span>
 
 		<label>Quel est son état?</label>
 		<select id="etat" name="etat">
@@ -65,14 +69,15 @@
 			<option value="moyenne">Moyenne</option>
 			<option value="endommage">Endommagé</option>
 		</select>
-		<span>&nbsp;{{ oEnchere.etat}}</span>
+		<span>&nbsp;{{ oTimbre.etat}}</span>
 
-		{# ======= FILE ========= #}
-		<h1>Ajout d'images</h1>
-		<p>Nous vous suggérons d'ajouter au minimum 1 image.
-		</p>
+		{# ======= FILE ========= 
+																<h1>Ajout d'images</h1>
+																<p>Nous vous suggérons d'ajouter au minimum 1 image.
+																</p>
+														
+																<input name="userfile" type="file"/>#}
 
-		<input name="userfile" type="file"/>
 
 		<input class="btn-lien" type="submit" name="" value="Mettre en ligne mon enchère">
 	</form>

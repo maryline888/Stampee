@@ -7,6 +7,9 @@ class Enchere extends Routeur
     private $oUtilConn;
     private $enchere_id;
     private $utilisateur_id;
+    private $enchere_erreurs;
+    private $timbre_erreurs;
+
 
 
 
@@ -19,14 +22,16 @@ class Enchere extends Routeur
     {
         $this->oUtilConn = $_SESSION['oUtilConn'] ?? null;
         $this->utilisateur_id  = $_GET['utilisateur_id'] ?? null;
+        $this->enchere_id  = $_GET['enchere_id'] ?? null;
         $this->oRequetesSQL = new RequetesSQL;
     }
 
     public function ajout()
     {
 
-        $enchere = [];
-        $erreurs = [];
+        $enchere_erreurs = [];
+        $timbre_erreurs = [];
+
         $_POST_enchere = [];
         $_POST_timbre = [];
         $_POST_image = [];
@@ -34,39 +39,64 @@ class Enchere extends Routeur
         // si post is empty = il va montrer direct la vue vEnchereAjout
 
         if (!empty($_POST)) {
-            $enchere = $_POST;
 
-            $oEnchere = new EnchereModele($enchere);
-            $erreurs = $oEnchere->erreurs;
 
-            if (count($erreurs) === 0) {
+            $_POST_enchere = [
+                'date_debut'         => $_POST['date_debut'],
+                'date_fin'           => $_POST['date_fin'],
+                'prix_plancher'      => $_POST['prix_plancher'],
+                'coup_de_coeur_lord' => $_POST['coup_de_coeur_lord']
+            ];
+
+            $_POST_timbre = [
+                //  'timbre_id'      => $_POST['timbre_id'],
+                'nom'            => $_POST['nom'],
+                'date_creation'  => $_POST['date_creation'],
+                'couleur'        => $_POST['couleur'],
+                'pays_origine'   => $_POST['pays_origine'],
+                'tirage'         => $_POST['tirage'],
+                'dimensions'     => $_POST['dimensions'],
+                'certifie'       => $_POST['certifie'],
+                'etat'           => $_POST['etat']
+            ];
+            //   var_dump($_POST_timbre);
+            $_POST_image = [];
+
+            //  print_r($_POST_enchere);
+            $oEnchere = new EnchereModele($_POST_enchere);
+
+            $enchere_erreurs = $oEnchere->enchere_erreurs;
+
+            $oTimbre = new TimbreModele($_POST_timbre);
+            //  $timbre_erreurs = $oTimbre->timbre_erreurs;
+
+
+            if (count($enchere_erreurs) === 0) {
                 $enchere_id = $this->oRequetesSQL->ajouterEnchere([
-                    'date_debut' => $oEnchere->date_debut,
-                    'date_fin' => $oEnchere->date_fin,
-                    'prix_plancher' => $oEnchere->prix_plancher,
+                    'date_debut'         => $oEnchere->date_debut,
+                    'date_fin'           => $oEnchere->date_fin,
+                    'prix_plancher'      => $oEnchere->prix_plancher,
                     'coup_de_coeur_lord' => $oEnchere->coup_de_coeur_lord,
-                    'timbre_id' => $oEnchere->timbre_id,
-                    'archive' => $oEnchere->archive
+                    'archive'            => $oEnchere->archive
                 ]);
                 $enchere_id = (int)$enchere_id;
+            }
 
-                // Séparer $_POST en 3 tableaux distincts
-                $_POST_enchere = array_filter($_POST, function ($key) {
-                    return substr($key, 0, 9) === 'enchere_';
-                }, ARRAY_FILTER_USE_KEY);
+            if (count($timbre_erreurs) === 0 && $enchere_id) {
+                //  var_dump($enchere_id);
 
-                $_POST_timbre = array_filter($_POST, function ($key) {
-                    return substr($key, 0, 7) === 'timbre_';
-                }, ARRAY_FILTER_USE_KEY);
-
-                $_POST_image = array_filter($_POST, function ($key) {
-                    return substr($key, 0, 7) === 'image_';
-                }, ARRAY_FILTER_USE_KEY);
-
-                // Copier les valeurs de $_POST dans les nouveaux tableaux
-                $_POST_enchere = array_intersect_key($_POST, $_POST_enchere);
-                $_POST_timbre = array_intersect_key($_POST, $_POST_timbre);
-                $_POST_image = array_intersect_key($_POST, $_POST_image);
+                //  var_dump('timbre', $oTimbre);
+                $timbre_id = $this->oRequetesSQL->ajouterTimbre([
+                    'nom'            => $oTimbre->getNom(),
+                    'date_creation'  => $oTimbre->getDate_creation(),
+                    'couleur'        => $oTimbre->getCouleur(),
+                    'pays_origine'   => $oTimbre->getPays_origine(),
+                    'tirage'         => $oTimbre->getTirage(),
+                    'dimensions'     => $oTimbre->getDimensions(),
+                    'certifie'       => $oTimbre->getCertifie(),
+                    'etat'           => $oTimbre->getEtat()
+                ]);
+                $timbre_id = (int)$timbre_id;
             }
         }
 
@@ -76,62 +106,4 @@ class Enchere extends Routeur
             'gabarit-frontend'
         );
     }
-
-    // public function ajout()
-    // {
-
-    //     $enchere = [];
-    //     $erreurs = [];
-    //     $_POST_enchere = [];
-    //     $_POST_timbre = [];
-    //     $_POST_image = [];
-
-    //     // si post is empty = il va montrer direct la vue vEnchereAjout
-
-    //     if (!empty($_POST)) {
-    //         $enchere = $_POST;
-
-    //         $oEnchere = new EnchereModele($enchere);
-    //         $erreurs = $oEnchere->erreurs;
-
-    //         if (count($erreurs) === 0) {
-
-
-
-    //             $enchere_id = $this->oRequetesSQL->ajouterEnchere([
-
-
-    //                 'date_debut' => $oEnchere->date_debut,
-    //                 'date_fin' => $oEnchere->date_fin,
-    //                 'prix_plancher' => $oEnchere->prix_plancher,
-    //                 'coup_de_coeur_lord' => $oEnchere->coup_de_coeur_lord,
-    //                 'timbre_id' => $oEnchere->timbre_id,
-    //                 'archive' => $oEnchere->archive
-
-    //             ]);
-    //             $enchere_id = (int)$enchere_id;
-    //             // '<pre>';
-    //             // print_r($_POST);
-    //             //creer objet enchere 
-    //         }
-    //         // il faut separer le $_POST en 3 array different 
-
-    //         // $_POST_enchere =
-    //         // $_POST_timbre =
-    //         // $_POST_image =
-
-    //         // echo "traitement de formulaire ici";
-    //         // die('ici');
-
-
-    //         //  $this->oRequetesSQL->getAjouterEnchere;
-    //     }
-
-
-    //     new Vue(
-    //         'vEnchereAjout',
-    //         array(),
-    //         'gabarit-frontend'
-    //     );
-    // }
 }//fin classe

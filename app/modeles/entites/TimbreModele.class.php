@@ -19,7 +19,7 @@ class TimbreModele
   // private $enchere_id;
 
 
-  private $erreurs = [];
+  private $timbre_erreurs = [];
 
 
 
@@ -64,7 +64,7 @@ class TimbreModele
   {
     return $this->tirage;
   }
-  public function getDimension()
+  public function getDimensions()
   {
     return $this->dimension;
   }
@@ -75,6 +75,10 @@ class TimbreModele
   public function getEtat()
   {
     return $this->etat;
+  }
+  public function getTimbre_erreurs()
+  {
+    return $this->timbre_erreurs;
   }
 
   /**
@@ -93,12 +97,12 @@ class TimbreModele
    * @param int $timbre_id
    * @return $this
    */
-  public function settimbre_id($timbre_id)
+  public function setTimbre_id($timbre_id)
   {
-    unset($this->erreurs['timbre_id']);
+    unset($this->timbre_erreurs['timbre_id']);
     $regExp = '/^[1-9]\d*$/';
     if (!preg_match($regExp, $timbre_id)) {
-      $this->erreurs['timbre_id'] = 'Numéro de timbre incorrect.';
+      $this->timbre_erreurs['timbre_id'] = 'Numéro de timbre incorrect.';
     }
     $this->timbre_id = $timbre_id;
     return $this;
@@ -111,11 +115,11 @@ class TimbreModele
    */
   public function setNom($nom)
   {
-    unset($this->erreurs['nom']);
+    unset($this->timbre_erreurs['nom']);
     $nom = trim($nom);
     $regExp = '/^.+$/';
     if (!preg_match($regExp, $nom)) {
-      $this->erreurs['nom'] = 'Au moins un caractère.';
+      $this->timbre_erreurs['nom'] = 'Au moins un caractère.';
     }
     $this->nom = $nom;
     return $this;
@@ -128,11 +132,14 @@ class TimbreModele
    */
   public function setDate_creation($date_creation)
   {
-    unset($this->erreurs['date_creation']);
-    // if (!preg_match('/^[1-9]\d*$/', $timbre_duree) || $timbre_duree < self::DUREE_MIN || $timbre_duree > self::DUREE_MAX) {
-    //   $this->erreurs['timbre_duree'] = "Entre " . self::DUREE_MIN . " et " . self::DUREE_MAX . ".";
-    // }
-    $this->date_creation = $date_creation;
+    unset($this->timbre_erreurs['date_creation']);
+    $regExp = '/^(19|20)\d{2}$/';
+    // Formater la date pour obtenir seulement l'année (4 chiffres)
+    if (!preg_match($regExp, $date_creation)) {
+      $this->timbre_erreurs['date_creation'] = 'svp inscrire une année à 4 chiffres commencant par 19 ou 20';
+    }
+    $this->date_creation = $date_creation . '01' . '01';
+
     return $this;
   }
 
@@ -143,11 +150,11 @@ class TimbreModele
    */
   public function setCouleur($couleur)
   {
-    unset($this->erreurs['couleur']);
+    unset($this->timbre_erreurs['couleur']);
     $nom = trim($couleur);
     $regExp = '/^.+$/';
     if (!preg_match($regExp, $couleur)) {
-      $this->erreurs['couleur'] = 'Vous devez inscrire la couleur principale.';
+      $this->timbre_erreurs['couleur'] = 'Vous devez inscrire la couleur principale.';
     }
     $this->couleur = $couleur;
     return $this;
@@ -160,11 +167,11 @@ class TimbreModele
    */
   public function setPays_origine($pays_origine)
   {
-    unset($this->erreurs['pays_origine']);
+    unset($this->timbre_erreurs['pays_origine']);
     $pays_origine = trim($pays_origine);
     $regExp = '/^[a-zA-Z\s]+$/';
     if (!preg_match($regExp, $pays_origine)) {
-      $this->erreurs['pays_origine'] = 'Lettre et espace seulement';
+      $this->timbre_erreurs['pays_origine'] = 'Lettre et espace seulement';
     }
     $this->pays_origine = $pays_origine;
     return $this;
@@ -177,11 +184,11 @@ class TimbreModele
    */
   public function setTirage($tirage)
   {
-    unset($this->erreurs['tirage']);
+    unset($this->timbre_erreurs['tirage']);
     $tirage = trim($tirage);
     $regExp = '/^\d+$/';
     if (!preg_match($regExp, $tirage)) {
-      $this->erreurs['tirage'] = "chiffres seulement";
+      $this->timbre_erreurs['tirage'] = "chiffres seulement";
     }
     $this->tirage = $tirage;
     return $this;
@@ -192,12 +199,12 @@ class TimbreModele
    * @param string $timbre_bande_annonce
    * @return $this
    */
-  public function setDimension($dimension)
+  public function setDimensions($dimensions)
   {
-    unset($this->erreurs['dimension']);
-    $dimension = trim($dimension);
+    unset($this->timbre_erreurs['dimensions']);
+    $dimensions = trim($dimensions);
 
-    $this->timbre_bande_annonce = $dimension;
+    $this->dimensions = $dimensions;
     return $this;
   }
 
@@ -208,9 +215,9 @@ class TimbreModele
    */
   public function setCertifie($certifie)
   {
-    unset($this->erreurs['certifie']);
+    unset($this->timbre_erreurs['certifie']);
 
-    $this->erreurs['certifie'] = 'certifie incorrect.';
+    $this->timbre_erreurs['certifie'] = 'certifie incorrect.';
     $this->certifie = $certifie;
     return $this;
   }
@@ -223,7 +230,7 @@ class TimbreModele
    */
   public function setEtat($etat)
   {
-    unset($this->erreurs['etat']);
+    unset($this->timbre_erreurs['etat']);
 
     $this->etat = $etat;
     return $this;
