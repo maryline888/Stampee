@@ -21,20 +21,21 @@ class Enchere extends Routeur
     public function __construct()
     {
         $this->oUtilConn = $_SESSION['oUtilConn'] ?? null;
-        $this->utilisateur_id  = $_GET['utilisateur_id'] ?? null;
-        $this->enchere_id  = $_GET['enchere_id'] ?? null;
+
+        $this->enchere_id  = $_POST['enchere_id'] ?? null;
         $this->oRequetesSQL = new RequetesSQL;
     }
 
     public function ajout()
     {
-
+        // var_dump('LIGNE:31', $_POST);
+        //$this->utilisateur_id  = $this->oUtilConn->utilisateur_id;
         $enchere_erreurs = [];
         $timbre_erreurs = [];
 
         $_POST_enchere = [];
         $_POST_timbre = [];
-        $_POST_image = [];
+
 
         // si post is empty = il va montrer direct la vue vEnchereAjout
 
@@ -49,7 +50,6 @@ class Enchere extends Routeur
             ];
 
             $_POST_timbre = [
-                //  'timbre_id'      => $_POST['timbre_id'],
                 'nom'            => $_POST['nom'],
                 'date_creation'  => $_POST['date_creation'],
                 'couleur'        => $_POST['couleur'],
@@ -57,18 +57,16 @@ class Enchere extends Routeur
                 'tirage'         => $_POST['tirage'],
                 'dimensions'     => $_POST['dimensions'],
                 'certifie'       => $_POST['certifie'],
-                'etat'           => $_POST['etat']
+                'etat'           => $_POST['etat'],
+                'utilisateur'    => $_POST['utilisateur_id']
             ];
-            //   var_dump($_POST_timbre);
-            $_POST_image = [];
 
             //  print_r($_POST_enchere);
             $oEnchere = new EnchereModele($_POST_enchere);
-
             $enchere_erreurs = $oEnchere->enchere_erreurs;
 
             $oTimbre = new TimbreModele($_POST_timbre);
-            //  $timbre_erreurs = $oTimbre->timbre_erreurs;
+            $timbre_erreurs = $oTimbre->timbre_erreurs;
 
 
             if (count($enchere_erreurs) === 0) {
@@ -83,21 +81,47 @@ class Enchere extends Routeur
             }
 
             if (count($timbre_erreurs) === 0 && $enchere_id) {
-                //  var_dump($enchere_id);
+                // var_dump($this->oUtilConn->utilisateur_id);
 
-                //  var_dump('timbre', $oTimbre);
+                // var_dump('timbre', $oTimbre);
+                //  $timbre_id = $this->oRequetesSQL->ajouterTimbre([
+                // var_dump($timbre_erreurs);
                 $timbre_id = $this->oRequetesSQL->ajouterTimbre([
-                    'nom'            => $oTimbre->getNom(),
-                    'date_creation'  => $oTimbre->getDate_creation(),
-                    'couleur'        => $oTimbre->getCouleur(),
-                    'pays_origine'   => $oTimbre->getPays_origine(),
-                    'tirage'         => $oTimbre->getTirage(),
-                    'dimensions'     => $oTimbre->getDimensions(),
-                    'certifie'       => $oTimbre->getCertifie(),
-                    'etat'           => $oTimbre->getEtat()
+                    'nom'            => $oTimbre->nom,
+                    'date_creation'  => $oTimbre->date_creation,
+                    'couleur'        => $oTimbre->couleur,
+                    'pays_origine'   => $oTimbre->pays_origine,
+                    'tirage'         => $oTimbre->tirage,
+                    'dimensions'     => $oTimbre->dimensions,
+                    'certifie'       => $oTimbre->certifie,
+                    'etat'           => $oTimbre->etat,
+                    'enchere_id'      => $enchere_id,
+                    'utilisateur'     => $this->oUtilConn->utilisateur_id,
+
                 ]);
+                // var_dump('erreurs', $timbre_erreurs->nom);
+                //  var_dump('100', $this->oUtilConn->utilisateur_id);
                 $timbre_id = (int)$timbre_id;
             }
+
+            $image_id = $this->oRequetesSQL->ajouerImage([
+                'image_url ' => $_FILES['tmp_name'],
+                'timbre_id'  => $timbre_id
+
+            ]);
+
+            // $_FILES;
+            // echo '<pre>';
+            // print_r($_POST_image);
+
+            //     [userfile] => Array
+            // (
+            //     [name] => mcd-21-4-19h45.png
+            //     [type] => image/png
+            //     [tmp_name] => /Applications/MAMP/tmp/php/php1uXulg
+            //     [error] => 0
+            //     [size] => 464841
+            // )
         }
 
         new Vue(
@@ -105,5 +129,11 @@ class Enchere extends Routeur
             array(),
             'gabarit-frontend'
         );
+    }
+
+
+    public function validation()
+    {
+        echo 'enchere validation ici';
     }
 }//fin classe

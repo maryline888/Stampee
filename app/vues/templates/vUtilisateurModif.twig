@@ -19,15 +19,15 @@
 		<span>&nbsp;{{ erreurs.utilisateur_courriel }}</span>
 
 		{# <label>Profil</label>
-																<select name="role_id">
-																	{% if utilisateur.role_id == "client" %}
-																		<option selected value="client">Client</option>
-														
-																	{% elseif utilisateur.role_id == "administrateur" %}
-																		<option value="2">Client</option>
-																		<option selected value="1">Administrateur</option>
-																	</select>
-																{% endif %} #}
+					<select name="role_id">
+						{% if utilisateur.role_id == "client" %}
+							<option selected value="client">Client</option>
+			
+						{% elseif utilisateur.role_id == "administrateur" %}
+							<option value="2">Client</option>
+							<option selected value="1">Administrateur</option>
+						</select>
+																		{% endif %} #}
 		{# <span>&nbsp;{{ erreurs.role_id }}</span> #}
 		<input type="hidden" name="utilisateur_id" value="{{ oUtilConn.utilisateur_id }}">
 		<input type="submit" value="Envoyer">

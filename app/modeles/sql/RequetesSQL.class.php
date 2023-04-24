@@ -112,18 +112,27 @@ class RequetesSQL extends RequetesPDO
 
   public function ajouterTimbre($champs)
   {
+    // var_dump($champs);
 
     $this->sql = '
       INSERT INTO TIMBRE
       SET nom = :nom,
       date_creation = :date_creation,
       couleur = :couleur,
-      pays_origine =:pays_origine,
+      pays_origine = :pays_origine,
       tirage = :tirage,
       dimensions = :dimensions,
       certifie = :certifie,
-      etat = :etat';
-
+      etat = :etat,
+      enchere_id = :enchere_id,
+      utilisateur = :utilisateur';
+    return $this->CUDLigne($champs);
+  }
+  public function ajouterImage($champs)
+  {
+    $this->sql = '
+  image_url = :image_url,
+  timbre_id = :timbre_id';
     return $this->CUDLigne($champs);
   }
 }

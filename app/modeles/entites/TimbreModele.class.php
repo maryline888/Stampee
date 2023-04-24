@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Classe de l'entité timbre
+ * Classe pour le modèle de l'entité timbre
  *
  */
 class TimbreModele
@@ -12,11 +12,11 @@ class TimbreModele
   private $couleur;
   private $pays_origine;
   private $tirage;
-  private $dimension;
+  private $dimensions;
   private $certifie;
   private $etat;
-  // private $utilisateur;
-  // private $enchere_id;
+  private $utilisateur;
+  private $enchere_id;
 
 
   private $timbre_erreurs = [];
@@ -36,9 +36,27 @@ class TimbreModele
   }
 
   /**
-   * gette nécessaire  lutilisateur de twig
+   * Accesseur magique d'une propriété de l'objet
    * @param string $prop, nom de la propriété
    * @return property value
+   */
+  public function __get($prop)
+  {
+    return $this->$prop;
+  }
+
+  /**
+   * Mutateur magique qui exécute le mutateur de la propriété en paramètre 
+   * @param string $prop, nom de la propriété
+   * @param $val, contenu de la propriété à mettre à jour
+   */
+  public function __set($prop, $val)
+  {
+    $setProperty = 'set' . ucfirst($prop);
+    $this->$setProperty($val);
+  }
+  /**
+   * getters nécessaire 
    */
   public function getTimbre_id()
   {
@@ -66,7 +84,7 @@ class TimbreModele
   }
   public function getDimensions()
   {
-    return $this->dimension;
+    return $this->dimensions;
   }
   public function getCertifie()
   {
@@ -76,21 +94,24 @@ class TimbreModele
   {
     return $this->etat;
   }
-  public function getTimbre_erreurs()
+  public function getErreurs()
   {
     return $this->timbre_erreurs;
   }
-
-  /**
-   * Mutateur magique qui exécute le mutateur de la propriété en paramètre 
-   * @param string $prop, nom de la propriété
-   * @param $val, contenu de la propriété à mettre à jour
-   */
-  public function __set($prop, $val)
+  public function getUtilisateur()
   {
-    $setProperty = 'set' . ucfirst($prop);
-    $this->$setProperty($val);
+    return $this->utilisateur;
   }
+  public function getEchere_id()
+  {
+    return $this->enchere_id;
+  }
+
+
+
+
+
+
 
   /**
    * Mutateur de la propriété timbre_id 
@@ -186,10 +207,10 @@ class TimbreModele
   {
     unset($this->timbre_erreurs['tirage']);
     $tirage = trim($tirage);
-    $regExp = '/^\d+$/';
-    if (!preg_match($regExp, $tirage)) {
-      $this->timbre_erreurs['tirage'] = "chiffres seulement";
-    }
+    // $regExp = '/^[a-zA-Z0-9]+$/';
+    // if (!preg_match($regExp, $tirage)) {
+    //   $this->timbre_erreurs['tirage'] = "chiffres et lettres seulement";
+    // }
     $this->tirage = $tirage;
     return $this;
   }
@@ -216,8 +237,10 @@ class TimbreModele
   public function setCertifie($certifie)
   {
     unset($this->timbre_erreurs['certifie']);
+    if (!$certifie) {
 
-    $this->timbre_erreurs['certifie'] = 'certifie incorrect.';
+      $this->timbre_erreurs['certifie'] = 'certifie incorrect.';
+    }
     $this->certifie = $certifie;
     return $this;
   }
@@ -233,6 +256,30 @@ class TimbreModele
     unset($this->timbre_erreurs['etat']);
 
     $this->etat = $etat;
+    return $this;
+  }
+
+  // /**
+  //  * Mutateur de la propriété timbre_genre_id 
+  //  * @param int $timbre_genre_id
+  //  * @return $this
+  //  */
+  public function SetUtilisateur($utilisateur)
+  {
+    unset($this->timbre_erreurs['utilisateur']);
+
+    $this->utilisateur = $utilisateur;
+    return $this;
+  }
+
+
+
+
+  public function SetEnchere_id($enchere_id)
+  {
+    unset($this->timbre_erreurs['enchere_id']);
+
+    $this->enchere_id = $enchere_id;
     return $this;
   }
 }

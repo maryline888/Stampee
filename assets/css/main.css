@@ -928,6 +928,7 @@ nav {
     font-family: 'Montserrat';
 }
 
+
 .menu-deroulant {
     position: relative;
 }
@@ -1599,16 +1600,13 @@ select {
 
 .section-connexion,
 .section-ajout,
-.section-enchere {
+.section-enchere,
+.section-profil {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
-
     font-family: 'Montserrat', sans-serif;
-
-
-
 }
 
 

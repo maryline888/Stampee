@@ -25,10 +25,10 @@
 					<li role="presentation">
 						<a role="menuitem" href="#">Aide</a>
 					</li>
-					<div
-						class="utilisateurConnecte">
-						{# <span id="utilisateur">{{ oUtilConn.utilisateur_prenom }}
-													{{ oUtilConn.utilisateur_nom }}</span> #}
+					<div class="utilisateurConnecte">
+
+						<a href="utilisateurProfil" id="utilisateur" class"nav-nom-util">{{ oUtilConn.utilisateur_prenom }}
+							{{ oUtilConn.utilisateur_nom }}</a>
 						<li role="presentation">
 							<a role="menuitem" href="utilisateurConnexion" class="{{ oUtilConn ? 'cache' : '' }}">Se connecter
 							</a>
@@ -50,6 +50,7 @@
 			</div>
 			<div class="menu-ctn">
 				<nav class="nav" role="menubar">
+
 					<a href="." role="menuitem" class="menu-my-account menu-space">Accueil</a>
 					<div id="enchereDeroulant" class="menu-deroulant closed">
 						<span id="enchere" role="menuitem" class="menu-space">Enchères

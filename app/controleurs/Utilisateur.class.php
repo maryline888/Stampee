@@ -71,7 +71,7 @@ class Utilisateur extends Routeur
       'vInscription',
       array(
         'titre'                  => 'Inscription',
-        'actionUri'              => 'inscription',
+        //  'actionUri'              => 'inscription',
         'erreurs'                => $erreurs
       ),
       'gabarit-frontend'
@@ -97,7 +97,7 @@ class Utilisateur extends Routeur
         $_SESSION['oUtilConn'] = new UtilisateurModele($utilisateur);
 
         $this->oUtilConn = $_SESSION['oUtilConn'];
-        var_dump($_SESSION['oUtilConn']);
+        //   var_dump($_SESSION['oUtilConn']);
 
         $this->getProfil();
         exit;
@@ -130,6 +130,7 @@ class Utilisateur extends Routeur
     //   ),
     //   'gabarit-frontend'
     // );
+    echo json_encode(true);
   }
 
   public function getProfil()

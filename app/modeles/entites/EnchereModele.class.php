@@ -13,6 +13,7 @@ class EnchereModele
     private $prix_plancher;
     private $coup_de_coeur_lord;
     private $archive;
+    private $utilisateur;
 
     private $enchere_erreurs = [];
 
@@ -76,7 +77,7 @@ class EnchereModele
         return $this->coup_de_coeur_lord;
     }
 
-    public function getEnchere_archive()
+    public function getArchive()
     {
         return $this->archive;
     }
@@ -159,8 +160,8 @@ class EnchereModele
     }
 
     /**
-     * Mutateur de la propriété coup_de_coeur_lord
-     * @param int $coup_de_coeur_lord
+     * Mutateur de la propriété archive
+     * @param int $archive
      * @return $this
      */
     public function setArchive($archive)
