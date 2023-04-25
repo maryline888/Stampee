@@ -1,7 +1,7 @@
 <section class="utilisateur-ajout">
-	<h1>{{ titre|upper }}</h1>
 
 	<form class="form-ajout" method="POST" action="utilisateurInscription">
+		<h1>Inscription</h1>
 
 		<label>Nom</label>
 		<input name="utilisateur_nom" value="{{ oUtilConn.utilisateur_nom }}">
@@ -25,5 +25,5 @@
 
 		<input name="role_id" value="2" type="hidden"></input>
 
-	<input type="submit" value="Envoyer">
+	<input type="submit" class="btn-lien" value="Envoyer">
 </form></section>

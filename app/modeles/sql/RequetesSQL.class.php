@@ -128,11 +128,13 @@ class RequetesSQL extends RequetesPDO
       utilisateur = :utilisateur';
     return $this->CUDLigne($champs);
   }
+
   public function ajouterImage($champs)
   {
     $this->sql = '
-  image_url = :image_url,
-  timbre_id = :timbre_id';
+    INSERT INTO IMAGE SET
+     image_url = :image_url,
+     timbre_id = :timbre_id';
     return $this->CUDLigne($champs);
   }
 }

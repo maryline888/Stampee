@@ -1,11 +1,11 @@
-<section class="section-enchere">
+<section class="section-enchere margin-top-petit">
 	<form enctype="multipart/form-data" class="form-enchere" action="" method="POST">
 
 		<input type="hidden" name="utilisateur_id" value="{{ oUtilConn.utilisateur_id }}">
 
 		<h1>Plateforme d'enchère</h1>
 		{# sois on laisse action vide et ca retournera dans la fonction ajout de la classe enchere
-																																																																					    sois on ajoute un traitement.php #}
+																																																																																			    sois on ajoute un traitement.php #}
 
 
 		{# ======= ENCHERE ========= #}
@@ -27,7 +27,7 @@
 
 
 		{# ======= TIMBRES ========= #}
-		<h1 class="">Informations concernant votre timbre</h1>
+		<h1 class="margin-top-petit">Informations concernant votre timbre</h1>
 
 		<label>Nom</label>
 		<input type="text" name="nom" value="{{ oTimbre.nom }}">
@@ -73,13 +73,13 @@
 		<span>&nbsp;{{ oTimbre.etat }}</span>
 
 		{# ======= FILE ========= #}
-		<h1>Ajout d'images</h1>
+		<h1 class="margin-top-petit">Ajout d'images</h1>
 		<p>Nous vous suggérons d'ajouter au minimum 1 image.
 		</p>
 
-		<input name="userfile" type="file"/>
+		<input class="margin-top-petit" name="userfile" type="file"/>
 
 
-		<input class="btn-lien" type="submit" name="" value="Mettre en ligne mon enchère">
+		<input class="btn-lien margin-top-petit" type="submit" name="" value="Mettre en ligne mon enchère">
 	</form>
 </section>

@@ -68,6 +68,9 @@ class Enchere extends Routeur
             $oTimbre = new TimbreModele($_POST_timbre);
             $timbre_erreurs = $oTimbre->timbre_erreurs;
 
+            $oImage = new ImageModele($_FILES);
+            $image_erreurs = $oImage->image_erreurs;
+
 
             if (count($enchere_erreurs) === 0) {
                 $enchere_id = $this->oRequetesSQL->ajouterEnchere([
@@ -103,10 +106,14 @@ class Enchere extends Routeur
                 //  var_dump('100', $this->oUtilConn->utilisateur_id);
                 $timbre_id = (int)$timbre_id;
             }
+            //echo '<pre>';
+            // var_dump($_FILES["userfile"]['tmp_name']);
+            $this->oRequetesSQL->ajouterImage([
+                // $_FILES;
 
-            $image_id = $this->oRequetesSQL->ajouerImage([
-                'image_url ' => $_FILES['tmp_name'],
-                'timbre_id'  => $timbre_id
+
+                // 'image_url ' =>  $oImage->image_url,
+                // 'timbre_id'  => $timbre_id
 
             ]);
 

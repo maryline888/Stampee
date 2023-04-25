@@ -19,10 +19,17 @@ html {
     width: 100%;
 }
 
+body {
+    /* background-color: var(--gris-pale); */
+}
+
 main>* {
     margin-bottom: 60px;
 }
 
+.back-color-gris {
+    background-color: var(--gris-pale);
+}
 
 a,
 ul {
@@ -82,6 +89,10 @@ em {
 
 .margin-top {
     margin-top: 100px;
+}
+
+.margin-top-petit {
+    margin-top: 40px;
 }
 
 .space {
@@ -156,6 +167,7 @@ em {
     background-color: var(--rouge);
     border-radius: var(--border-radius);
     color: var(--blanc);
+    text-align: center;
 }
 
 .btn-lien:hover {
@@ -1589,48 +1601,44 @@ select {
 
 /* début vUtilisateur*/
 
+
+.section-ajout,
+.section-enchere,
+.section-profil,
 .utilisateur-ajout {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--gris-pale);
-    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    margin: 40px;
 }
 
-.section-connexion,
-.section-ajout,
-.section-enchere,
-.section-profil {
+.section-connexion {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    gap: 30px;
     font-family: 'Montserrat', sans-serif;
 }
 
-
-.section-connexion,
+.section-connexion h1,
 .section-ajout h1,
 .section-enchere h1 {
     margin-bottom: 20px;
     font-size: var(--font-tall);
 }
 
+.form-ajout h1 {
+    margin-bottom: 20px;
+    font-size: var(--font-tallest);
+}
+
 .section-enchere h1::after {
     margin: 20px;
 }
-
-.form-ajout,
-.form-connexion {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
-}
-
 
 .form-ajout input[type='date'],
 .form-ajout select {
@@ -1646,32 +1654,49 @@ select {
 
 
 /* section du formulaire denchaire  */
-
-
+.form-ajout,
+.form-connexion,
 .form-enchere {
+    background-color: var(--gris-pale);
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    /* gap: 20px; */
-    padding: 40px;
+    padding: 50px;
     align-items: left;
     justify-content: left;
-    border: 1px solid black;
+    border-radius: var(--border-radius);
 
 }
 
+.form-ajout input,
+.form-connexion input,
 .form-enchere input {
-    width: 33%;
     margin-bottom: 20px;
     padding: .5em;
-    border-color: var(--gris-fonce);
-    border: .5px solid;
+    /* border-color: var(--gris-fonce); */
+    border: transparent;
     border-radius: 8px;
 
 }
 
-.form-enchere label {
+.div-connexion {
+    border-radius: var(--border-radius);
+    background-color: var(--gris-pale);
+    padding: 50px;
 
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    align-items: left;
+    justify-content: left;
+}
+
+.div-connexion p {
+    margin-bottom: 40px;
+}
+
+.form-enchere label {
     margin-bottom: .55em;
 }
 

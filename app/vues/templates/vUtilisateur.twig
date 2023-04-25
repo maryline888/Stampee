@@ -1,29 +1,25 @@
 <script>
 	history.pushState({}, '', 'utilisateurProfil')
 </script>
-<section class="section-profil">
+<section class="section-profil margin-top-petit">
 	<h3>
 		Bonjour
-		<p>
-			{{ oUtilConn.utilisateur_prenom }}
-			{{ oUtilConn.utilisateur_nom }}
-		</p>
+
+		{{ oUtilConn.utilisateur_prenom }}
+		{{ oUtilConn.utilisateur_nom }}
+
 	</h3>
 	<p class="messageRetourAction {{ classRetour }}">{{ messageRetourAction }}&nbsp;</p>
-	<div class="utilisateurs">
 
-		<h4>Courriel</h4><br>
-		<p>{{ oUtilConn.utilisateur_courriel }}</p>
-		<h4>Adresse</h4><br>
-		<p>{{ oUtilConn.utilisateur_adresse }}</p>
-		<a class="btn" href="utilisateurModifier">Modifier mon profil</a><br>
-		<a class="btn" href="utilisateurSupprimer {{ oUtilConn.utilisateur_id }}">Supprimer mon profil</a>
-	</div>
-</section>
 
-<section>
-	{# <a class="btn" href="enchereAjout&utilisateur={{ oUtilConn.utilisateur_id }}">Créer une enchère</a> #}
-	<a class="btn" href="enchereAjout">Créer une enchère</a>
+	<h4>Courriel</h4><br>
+	<p>{{ oUtilConn.utilisateur_courriel }}</p>
+	<h4>Adresse</h4><br>
+	<p>{{ oUtilConn.utilisateur_adresse }}</p>
+	<a class="btn margin-top-petit" href="utilisateurModifier">Modifier mon profil</a><br>
+	<a class="btn" href="utilisateurSupprimer {{ oUtilConn.utilisateur_id }}">Supprimer mon profil</a>
+
+	<a class="btn-lien margin-top-petit" href="enchereAjout">Créer une enchère</a>
 </section>
 
 {{ include("modaleSuppression.twig") }}

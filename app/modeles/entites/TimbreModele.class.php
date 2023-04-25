@@ -107,12 +107,6 @@ class TimbreModele
     return $this->enchere_id;
   }
 
-
-
-
-
-
-
   /**
    * Mutateur de la propriété timbre_id 
    * @param int $timbre_id

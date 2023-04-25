@@ -1,9 +1,10 @@
 <section class="section-connexion">
-	<h1>Connexion</h1>
+
 
 	<form name="frmConnexion" class="form-connexion" method="POST" {% if actionUri %} action="{{ actionUri }}" {% endif %}>
+		<h1>Connexion</h1>
 
-		<br><span id="messageErreurConnexion">&nbsp;{{ messageErreurConnexion }}</span>
+		<span id="messageErreurConnexion">&nbsp;{{ messageErreurConnexion }}</span>
 
 		<label>Courriel</label>
 		<input name="utilisateur_courriel" value="">
@@ -11,8 +12,15 @@
 		<label>Mot de passe</label>
 		<input type="password" name="utilisateur_mdp" value="">
 
-		<input type="submit" value="Envoyer">
+		<input type="submit" class="btn-lien" value="Envoyer">
 
 	</form>
+
+	<div class="div-connexion">
+
+		<h1>Pas encore membre ?</h1>
+
+		<a href="utilisateurInscription" class="btn-lien">Je veux m'inscrire</a>
+	</div>
 
 </section>
