@@ -10,7 +10,7 @@ class ImageModele
     private $image_id;
     private $image_url;
     private $timbre_id;
-
+    private $userfile;
     private $image_erreurs;
 
     /**
@@ -57,14 +57,25 @@ class ImageModele
     {
         return $this->timbre_id;
     }
-    public function getErreurs()
+    // public function getErreurs()
+    // {
+    //     return $this->image_erreurs;
+    // }
+    public function getUserfile()
     {
-        return $this->image_erreurs;
+        return $this->userfile;
+    }
+
+    public function setUserfile($userfile)
+    {
+        unset($this->image_erreurs['userfile']);
+        $this->image_erreurs = $userfile;
+        return $this;
     }
 
     public function setImage_id($image_id)
     {
-        unset($this->timbre_erreurs['image_id']);
+        unset($this->image_erreurs['image_id']);
 
         //   $regExp = '/^.+$/';
         //   if (!preg_match($regExp, $nom)) {
@@ -76,7 +87,7 @@ class ImageModele
 
     public function setImage_url($image_url)
     {
-        unset($this->timbre_erreurs['image_url']);
+        unset($this->image_erreurs['image_url']);
 
         //   $regExp = '/^.+$/';
         //   if (!preg_match($regExp, $nom)) {
@@ -91,12 +102,12 @@ class ImageModele
 
     public function setTimbre_id($timbre_id)
     {
-        unset($this->timbre_erreurs['timbre_id']);
+        unset($this->image_erreurs['timbre_id']);
         $regExp = '/^[1-9]\d*$/';
         if (!preg_match($regExp, $timbre_id)) {
-            $this->timbre_erreurs['timbre_id'] = 'Numéro de timbre incorrect.';
+            $this->image_erreurs['timbre_id'] = 'Numéro de timbre incorrect.';
         }
-        $this->timbre_id = $timbre_id;
+        $this->image_erreurs = $timbre_id;
         return $this;
     }
 }

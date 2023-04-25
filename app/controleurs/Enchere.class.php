@@ -5,10 +5,12 @@ class Enchere extends Routeur
 
 
     private $oUtilConn;
+    private $image_id;
     private $enchere_id;
     private $utilisateur_id;
     private $enchere_erreurs;
     private $timbre_erreurs;
+    private $image_erreurs;
 
 
 
@@ -21,8 +23,10 @@ class Enchere extends Routeur
     public function __construct()
     {
         $this->oUtilConn = $_SESSION['oUtilConn'] ?? null;
-
-        $this->enchere_id  = $_POST['enchere_id'] ?? null;
+        $this->image_erreurs;
+        $this->image_id;
+        $this->enchere_id;
+        $this->enchere_erreurs;
         $this->oRequetesSQL = new RequetesSQL;
     }
 
@@ -30,8 +34,8 @@ class Enchere extends Routeur
     {
         // var_dump('LIGNE:31', $_POST);
         //$this->utilisateur_id  = $this->oUtilConn->utilisateur_id;
-        $enchere_erreurs = [];
-        $timbre_erreurs = [];
+        $this->enchere_erreurs = [];
+        $this->timbre_erreurs = [];
 
         $_POST_enchere = [];
         $_POST_timbre = [];
@@ -61,18 +65,17 @@ class Enchere extends Routeur
                 'utilisateur'    => $_POST['utilisateur_id']
             ];
 
-            //  print_r($_POST_enchere);
             $oEnchere = new EnchereModele($_POST_enchere);
-            $enchere_erreurs = $oEnchere->enchere_erreurs;
+            $this->enchere_erreurs = $oEnchere->enchere_erreurs;
 
             $oTimbre = new TimbreModele($_POST_timbre);
-            $timbre_erreurs = $oTimbre->timbre_erreurs;
+            $this->timbre_erreurs = $oTimbre->timbre_erreurs;
 
             $oImage = new ImageModele($_FILES);
-            $image_erreurs = $oImage->image_erreurs;
+            $this->image_erreurs = $oImage->image_erreurs;
+            $this->image_id = "";
 
-
-            if (count($enchere_erreurs) === 0) {
+            if (count($this->enchere_erreurs) === 0) {
                 $enchere_id = $this->oRequetesSQL->ajouterEnchere([
                     'date_debut'         => $oEnchere->date_debut,
                     'date_fin'           => $oEnchere->date_fin,
@@ -83,12 +86,8 @@ class Enchere extends Routeur
                 $enchere_id = (int)$enchere_id;
             }
 
-            if (count($timbre_erreurs) === 0 && $enchere_id) {
-                // var_dump($this->oUtilConn->utilisateur_id);
+            if (count($this->timbre_erreurs) === 0 && $enchere_id) {
 
-                // var_dump('timbre', $oTimbre);
-                //  $timbre_id = $this->oRequetesSQL->ajouterTimbre([
-                // var_dump($timbre_erreurs);
                 $timbre_id = $this->oRequetesSQL->ajouterTimbre([
                     'nom'            => $oTimbre->nom,
                     'date_creation'  => $oTimbre->date_creation,
@@ -102,33 +101,29 @@ class Enchere extends Routeur
                     'utilisateur'     => $this->oUtilConn->utilisateur_id,
 
                 ]);
-                // var_dump('erreurs', $timbre_erreurs->nom);
-                //  var_dump('100', $this->oUtilConn->utilisateur_id);
                 $timbre_id = (int)$timbre_id;
             }
-            //echo '<pre>';
-            // var_dump($_FILES["userfile"]['tmp_name']);
-            $this->oRequetesSQL->ajouterImage([
-                // $_FILES;
 
-
-                // 'image_url ' =>  $oImage->image_url,
-                // 'timbre_id'  => $timbre_id
-
-            ]);
-
-            // $_FILES;
-            // echo '<pre>';
-            // print_r($_POST_image);
-
-            //     [userfile] => Array
-            // (
-            //     [name] => mcd-21-4-19h45.png
-            //     [type] => image/png
-            //     [tmp_name] => /Applications/MAMP/tmp/php/php1uXulg
-            //     [error] => 0
-            //     [size] => 464841
-            // )
+            if (isset($_FILES["userfile"])) {
+                $file_name = $_FILES["userfile"]["name"];
+                $file_tmp = $_FILES["userfile"]["tmp_name"];
+                $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+                $image_name = uniqid() . '.' . $file_ext;
+                $uploads_folder = __DIR__ . '/../../uploads/';
+                $target_path = $uploads_folder . $image_name;
+                if (!is_dir($uploads_folder)) {
+                    mkdir($uploads_folder, 0755, true);
+                }
+                if (move_uploaded_file($file_tmp, $target_path)) {
+                    echo 'L\'image à bien été ajoutée.';
+                    $this->image_id = $this->oRequetesSQL->ajouterImage([
+                        'image_url' => $target_path,
+                        'timbre_id' => $timbre_id
+                    ]);
+                } else {
+                    echo 'Un problème est survenu, veuillez recommencer.';
+                }
+            }
         }
 
         new Vue(

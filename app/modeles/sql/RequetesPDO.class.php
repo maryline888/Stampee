@@ -34,13 +34,26 @@ class RequetesPDO
    */
   public function CUDLigne($params = [])
   {
-    $sPDO = SingletonPDO::getInstance();
+    try {
+      $sPDO = SingletonPDO::getInstance();
 
-    $oPDOStatement = $sPDO->prepare($this->sql);
-    foreach ($params as $nomParam => $valParam) $oPDOStatement->bindValue(':' . $nomParam, $valParam);
-    $oPDOStatement->execute();
-    if ($oPDOStatement->rowCount() <= 0) return false;
-    if ($sPDO->lastInsertId() > 0)       return $sPDO->lastInsertId();
-    return true;
+      $oPDOStatement = $sPDO->prepare($this->sql);
+      foreach ($params as $nomParam => $valParam) {
+        $oPDOStatement->bindValue(':' . $nomParam, $valParam);
+      }
+      $oPDOStatement->execute();
+
+      if ($oPDOStatement->rowCount() <= 0) {
+        return false;
+      }
+
+      if ($sPDO->lastInsertId() > 0) {
+        return $sPDO->lastInsertId();
+      }
+
+      return true;
+    } catch (PDOException $e) {
+      error_log("Erreur lors de l'exécution de la requête SQL : " . $e->getMessage());
+    }
   }
 }
