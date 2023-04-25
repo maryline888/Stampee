@@ -8,12 +8,8 @@ class Enchere extends Routeur
     private $image_id;
     private $enchere_id;
     private $utilisateur_id;
-    private $enchere_erreurs;
-    private $timbre_erreurs;
-    private $image_erreurs;
-
-
-
+    private $erreurs;
+    private $messageRetour;
 
     /**
      * Constructeur qui initialise des propriétés à partir du query string
@@ -23,19 +19,15 @@ class Enchere extends Routeur
     public function __construct()
     {
         $this->oUtilConn = $_SESSION['oUtilConn'] ?? null;
-        $this->image_erreurs;
-        $this->image_id;
+
         $this->enchere_id;
-        $this->enchere_erreurs;
         $this->oRequetesSQL = new RequetesSQL;
     }
 
     public function ajout()
     {
-        // var_dump('LIGNE:31', $_POST);
-        //$this->utilisateur_id  = $this->oUtilConn->utilisateur_id;
-        $this->enchere_erreurs = [];
-        $this->timbre_erreurs = [];
+
+        $this->erreurs = [];
 
         $_POST_enchere = [];
         $_POST_timbre = [];
@@ -66,16 +58,16 @@ class Enchere extends Routeur
             ];
 
             $oEnchere = new EnchereModele($_POST_enchere);
-            $this->enchere_erreurs = $oEnchere->enchere_erreurs;
+
 
             $oTimbre = new TimbreModele($_POST_timbre);
-            $this->timbre_erreurs = $oTimbre->timbre_erreurs;
+
 
             $oImage = new ImageModele($_FILES);
-            $this->image_erreurs = $oImage->image_erreurs;
+
             $this->image_id = "";
 
-            if (count($this->enchere_erreurs) === 0) {
+            if (count($this->erreurs) === 0) {
                 $enchere_id = $this->oRequetesSQL->ajouterEnchere([
                     'date_debut'         => $oEnchere->date_debut,
                     'date_fin'           => $oEnchere->date_fin,
@@ -86,7 +78,7 @@ class Enchere extends Routeur
                 $enchere_id = (int)$enchere_id;
             }
 
-            if (count($this->timbre_erreurs) === 0 && $enchere_id) {
+            if (count($this->erreurs) === 0 && $enchere_id) {
 
                 $timbre_id = $this->oRequetesSQL->ajouterTimbre([
                     'nom'            => $oTimbre->nom,
@@ -115,8 +107,8 @@ class Enchere extends Routeur
                     mkdir($uploads_folder, 0755, true);
                 }
                 if (move_uploaded_file($file_tmp, $target_path)) {
-                    echo 'L\'image à bien été ajoutée.';
-                    $this->image_id = $this->oRequetesSQL->ajouterImage([
+                    // echo 'L\'image à bien été ajoutée.';
+                    $image_id = $this->oRequetesSQL->ajouterImage([
                         'image_url' => $target_path,
                         'timbre_id' => $timbre_id
                     ]);
@@ -124,11 +116,19 @@ class Enchere extends Routeur
                     echo 'Un problème est survenu, veuillez recommencer.';
                 }
             }
+
+            if ($image_id) {
+                $this->validation();
+            }
         }
+
 
         new Vue(
             'vEnchereAjout',
-            array(),
+            array(
+                'oUtilConn' => $this->oUtilConn,
+
+            ),
             'gabarit-frontend'
         );
     }
@@ -136,6 +136,14 @@ class Enchere extends Routeur
 
     public function validation()
     {
-        echo 'enchere validation ici';
+
+        new Vue(
+            'vEnchereValidation',
+            array(
+                'oUtilConn' => $this->oUtilConn
+
+            ),
+            'gabarit-frontend'
+        );
     }
 }//fin classe

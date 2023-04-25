@@ -19,7 +19,8 @@ class Routeur
     ['utilisateurDeconnexion',   "Utilisateur",    "deconnexion"],
     ["utilisateurProfil",        "Utilisateur",    "getProfil"],
     ["enchereAjout",             "Enchere",        "ajout"],
-    ["enchereValidation",        "Enchere",        "validation"]
+    ["enchereValidation",        "Enchere",        "validation"],
+    ["enchereListe",             "Enchere",        "liste"],
   ];
 
   protected $oRequetesSQL; // objet RequetesSQL utilisé par tous les contrôleurs

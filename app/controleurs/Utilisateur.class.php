@@ -71,7 +71,6 @@ class Utilisateur extends Routeur
       'vInscription',
       array(
         'titre'                  => 'Inscription',
-        //  'actionUri'              => 'inscription',
         'erreurs'                => $erreurs
       ),
       'gabarit-frontend'
@@ -130,7 +129,7 @@ class Utilisateur extends Routeur
     //   ),
     //   'gabarit-frontend'
     // );
-    echo json_encode(true);
+    //  echo json_encode(true);
   }
 
   public function getProfil()

@@ -1668,12 +1668,15 @@ select {
 
 }
 
+.form-connexion {
+    margin-top: 20px;
+}
+
 .form-ajout input,
 .form-connexion input,
 .form-enchere input {
     margin-bottom: 20px;
     padding: .5em;
-    /* border-color: var(--gris-fonce); */
     border: transparent;
     border-radius: 8px;
 
@@ -1702,4 +1705,8 @@ select {
 
 .form-enchere select {
     width: max-content;
+}
+
+.erreur {
+    color: red;
 }

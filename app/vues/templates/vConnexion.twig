@@ -4,7 +4,7 @@
 	<form name="frmConnexion" class="form-connexion" method="POST" {% if actionUri %} action="{{ actionUri }}" {% endif %}>
 		<h1>Connexion</h1>
 
-		<span id="messageErreurConnexion">&nbsp;{{ messageErreurConnexion }}</span>
+		<span class="erreur" id="messageErreurConnexion">&nbsp;{{ messageErreurConnexion }}</span>
 
 		<label>Courriel</label>
 		<input name="utilisateur_courriel" value="">

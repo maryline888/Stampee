@@ -2,7 +2,7 @@ CREATE TABLE ENCHERE (
   enchere_id SMALLINT UNSIGNED AUTO_INCREMENT,
   date_debut DATE NOT NULL,
   date_fin DATE NOT NULL,
-  prix_plancher DECIMAL NOT NULL,
+  prix_plancher DECIMAL(19,2) NOT NULL,
   coup_de_coeur_lord boolean,
   archive boolean NOT NULL,
   PRIMARY KEY (enchere_id)
@@ -21,10 +21,10 @@ CREATE TABLE TIMBRE (
   timbre_id SMALLINT UNSIGNED AUTO_INCREMENT,
   nom VARCHAR(50),
   date_creation DATE NOT NULL,
-  couleur VARCHAR(50) NOT NULL,
+  couleur VARCHAR(20) NOT NULL,
   pays_origine VARCHAR(50) NOT NULL,
   tirage VARCHAR(50) ,
-  dimensions VARCHAR(50) NOT NULL,
+  dimensions VARCHAR(50) ,
   certifie boolean NOT NULL,
   etat VARCHAR(50),
   utilisateur SMALLINT UNSIGNED,
@@ -54,9 +54,9 @@ CREATE TABLE FAVORIS(
 CREATE TABLE MISE (
   utilisateur_id SMALLINT UNSIGNED,
   enchere_id SMALLINT UNSIGNED,
-  montant DECIMAL NOT NULL,
+  montant DECIMAL(19,2) NOT NULL,
   gagnant SMALLINT UNSIGNED,
-  offre_actuelle DECIMAL,
+  offre_actuelle DECIMAL(19,2),
   quantite_mises SMALLINT,
   date_mise DATE NOT NULL ,
   PRIMARY KEY (utilisateur_id, enchere_id),
@@ -86,7 +86,6 @@ INSERT INTO `UTILISATEUR` (`utilisateur_id`, `utilisateur_nom`, `utilisateur_pre
 (1, 'admintes', 'test', 'test@test.ca', 'fb86376cb7bfd6553d365f1e9da9886c18d2b3adc19016202d0e32457e145d2b43cefeb08b3a871bc336048e1d62db32d88f3ad21d7231dc48922836bdb41855', '123 rue allo montreal qc canada', 1),
 (2, 'Cartier', 'Jean', 'jeancartier@mail.ca', 'fb86376cb7bfd6553d365f1e9da9886c18d2b3adc19016202d0e32457e145d2b43cefeb08b3a871bc336048e1d62db32d88f3ad21d7231dc48922836bdb41855', '111 jeantalon montreal qc can ', 2),
 (3, 'mari', 'leblanc', 'mari@leblanc.ca', '1f6f37c530c775842dc907ec3553edaf5d7d08c8327c78359312822e4e9adcebd0475cc92d02bd8d25952ba1c2f6da4b3ce5546618dec93059e2d6611118f466', '123 djeje mejejd', 2);
-(4, 'sss', 'ssss', 'sss@test.ca', '1f6f37c530c775842dc907ec3553edaf5d7d08c8327c78359312822e4e9adcebd0475cc92d02bd8d25952ba1c2f6da4b3ce5546618dec93059e2d6611118f466', 'sss sss ss', 1),
 (5, 'gagner', 'Ella', 'ella@elle.ca', '1f6f37c530c775842dc907ec3553edaf5d7d08c8327c78359312822e4e9adcebd0475cc92d02bd8d25952ba1c2f6da4b3ce5546618dec93059e2d6611118f466', 'mandeville', 2),
 
 INSERT INTO ROLE VALUES ('2', 'client'), ('1', 'administrateur');

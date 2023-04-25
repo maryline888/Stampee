@@ -19,7 +19,7 @@ class TimbreModele
   private $enchere_id;
 
 
-  private $timbre_erreurs = [];
+  private $erreurs = [];
 
 
 
@@ -96,7 +96,7 @@ class TimbreModele
   }
   public function getErreurs()
   {
-    return $this->timbre_erreurs;
+    return $this->erreurs;
   }
   public function getUtilisateur()
   {
@@ -114,10 +114,10 @@ class TimbreModele
    */
   public function setTimbre_id($timbre_id)
   {
-    unset($this->timbre_erreurs['timbre_id']);
+    unset($this->erreurs['timbre_id']);
     $regExp = '/^[1-9]\d*$/';
     if (!preg_match($regExp, $timbre_id)) {
-      $this->timbre_erreurs['timbre_id'] = 'Numéro de timbre incorrect.';
+      $this->erreurs['timbre_id'] = 'Numéro de timbre incorrect.';
     }
     $this->timbre_id = $timbre_id;
     return $this;
@@ -130,28 +130,28 @@ class TimbreModele
    */
   public function setNom($nom)
   {
-    unset($this->timbre_erreurs['nom']);
+    unset($this->erreurs['nom']);
     $nom = trim($nom);
     $regExp = '/^.+$/';
     if (!preg_match($regExp, $nom)) {
-      $this->timbre_erreurs['nom'] = 'Au moins un caractère.';
+      $this->erreurs['nom'] = 'Au moins un caractère.';
     }
     $this->nom = $nom;
     return $this;
   }
 
   /**
-   * Mutateur de la propriété timbre_duree 
-   * @param int $timbre_duree, en minutes
+   * Mutateur de la propriété date_creation 
+   * @param int $date_creation
    * @return $this
    */
   public function setDate_creation($date_creation)
   {
-    unset($this->timbre_erreurs['date_creation']);
+    unset($this->erreurs['date_creation']);
     $regExp = '/^(19|20)\d{2}$/';
     // Formater la date pour obtenir seulement l'année (4 chiffres)
     if (!preg_match($regExp, $date_creation)) {
-      $this->timbre_erreurs['date_creation'] = 'svp inscrire une année à 4 chiffres commencant par 19 ou 20';
+      $this->erreurs['date_creation'] = 'svp inscrire une année à 4 chiffres commencant par 19 ou 20';
     }
     $this->date_creation = $date_creation . '01' . '01';
 
@@ -159,64 +159,61 @@ class TimbreModele
   }
 
   /**
-   * Mutateur de la propriété timbre_annee_sortie 
-   * @param int $timbre_annee_sortie
+   * Mutateur de la propriété couleur 
+   * @param int $couleur
    * @return $this
    */
   public function setCouleur($couleur)
   {
-    unset($this->timbre_erreurs['couleur']);
+    unset($this->erreurs['couleur']);
     $nom = trim($couleur);
     $regExp = '/^.+$/';
     if (!preg_match($regExp, $couleur)) {
-      $this->timbre_erreurs['couleur'] = 'Vous devez inscrire la couleur principale.';
+      $this->erreurs['couleur'] = 'Vous devez inscrire la couleur principale.';
     }
     $this->couleur = $couleur;
     return $this;
   }
 
   /**
-   * Mutateur de la propriété timbre_resume
-   * @param string $timbre_resume
+   * Mutateur de la propriété pays_origine
+   * @param string $pays_origine
    * @return $this
    */
   public function setPays_origine($pays_origine)
   {
-    unset($this->timbre_erreurs['pays_origine']);
+    unset($this->erreurs['pays_origine']);
     $pays_origine = trim($pays_origine);
     $regExp = '/^[a-zA-Z\s]+$/';
     if (!preg_match($regExp, $pays_origine)) {
-      $this->timbre_erreurs['pays_origine'] = 'Lettre et espace seulement';
+      $this->erreurs['pays_origine'] = 'Lettre et espace seulement';
     }
     $this->pays_origine = $pays_origine;
     return $this;
   }
 
   /**
-   * Mutateur de la propriété timbre_affiche
-   * @param string $timbre_affiche
+   * Mutateur de la propriété tirage
+   * @param string $tirage
    * @return $this
    */
   public function setTirage($tirage)
   {
-    unset($this->timbre_erreurs['tirage']);
+    unset($this->erreurs['tirage']);
     $tirage = trim($tirage);
-    // $regExp = '/^[a-zA-Z0-9]+$/';
-    // if (!preg_match($regExp, $tirage)) {
-    //   $this->timbre_erreurs['tirage'] = "chiffres et lettres seulement";
-    // }
+
     $this->tirage = $tirage;
     return $this;
   }
 
   /**
-   * Mutateur de la propriété timbre_bande_annonce
-   * @param string $timbre_bande_annonce
+   * Mutateur de la propriété dimensions
+   * @param string $dimensions
    * @return $this
    */
   public function setDimensions($dimensions)
   {
-    unset($this->timbre_erreurs['dimensions']);
+    unset($this->erreurs['dimensions']);
     $dimensions = trim($dimensions);
 
     $this->dimensions = $dimensions;
@@ -224,16 +221,14 @@ class TimbreModele
   }
 
   /**
-   * Mutateur de la propriété timbre_statut
-   * @param int $timbre_statut
+   * @param $certifie
    * @return $this
    */
   public function setCertifie($certifie)
   {
-    unset($this->timbre_erreurs['certifie']);
-    if (!$certifie) {
-
-      $this->timbre_erreurs['certifie'] = 'certifie incorrect.';
+    unset($this->erreurs['certifie']);
+    if ($certifie == null || $certifie == false) {
+      $certifie = 0;
     }
     $this->certifie = $certifie;
     return $this;
@@ -241,26 +236,24 @@ class TimbreModele
 
 
   /**
-   * Mutateur de la propriété timbre_genre_id 
-   * @param int $timbre_genre_id
+   * @param int $etat
    * @return $this
    */
   public function setEtat($etat)
   {
-    unset($this->timbre_erreurs['etat']);
+    unset($this->erreurs['etat']);
 
     $this->etat = $etat;
     return $this;
   }
 
-  // /**
-  //  * Mutateur de la propriété timbre_genre_id 
-  //  * @param int $timbre_genre_id
-  //  * @return $this
-  //  */
+  /**
+   * @param $utlisateur
+   * @return $this
+   */
   public function SetUtilisateur($utilisateur)
   {
-    unset($this->timbre_erreurs['utilisateur']);
+    unset($this->erreurs['utilisateur']);
 
     $this->utilisateur = $utilisateur;
     return $this;
@@ -271,7 +264,7 @@ class TimbreModele
 
   public function SetEnchere_id($enchere_id)
   {
-    unset($this->timbre_erreurs['enchere_id']);
+    unset($this->erreurs['enchere_id']);
 
     $this->enchere_id = $enchere_id;
     return $this;

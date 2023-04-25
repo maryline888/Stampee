@@ -99,8 +99,8 @@ class RequetesSQL extends RequetesPDO
    */
   public function ajouterEnchere(array $champs)
   {
-    try {
-      $this->sql = '
+
+    $this->sql = '
             INSERT INTO ENCHERE 
             SET date_debut = :date_debut, 
             date_fin = :date_fin, 
@@ -108,10 +108,7 @@ class RequetesSQL extends RequetesPDO
             coup_de_coeur_lord = :coup_de_coeur_lord,
             archive = :archive';
 
-      return $this->CUDLigne($champs);
-    } catch (PDOException $e) {
-      // Gérer l'exception ici, par exemple enregistrez l'erreur dans un fichier log
-    }
+    return $this->CUDLigne($champs);
   }
 
   /**
@@ -122,8 +119,8 @@ class RequetesSQL extends RequetesPDO
    */
   public function ajouterTimbre(array $champs)
   {
-    try {
-      $this->sql = '
+
+    $this->sql = '
             INSERT INTO TIMBRE
             SET nom = :nom,
             date_creation = :date_creation,
@@ -135,10 +132,7 @@ class RequetesSQL extends RequetesPDO
             etat = :etat,
             enchere_id = :enchere_id,
             utilisateur = :utilisateur';
-      return $this->CUDLigne($champs);
-    } catch (PDOException $e) {
-      // Gérer l'exception ici, par exemple enregistrez l'erreur dans un fichier log
-    }
+    return $this->CUDLigne($champs);
   }
 
   /**
@@ -149,14 +143,11 @@ class RequetesSQL extends RequetesPDO
    */
   public function ajouterImage(array $champs)
   {
-    try {
-      $this->sql = '
+
+    $this->sql = '
         INSERT INTO IMAGE SET
         image_url = :image_url,
         timbre_id = :timbre_id';
-      return $this->CUDLigne($champs);
-    } catch (PDOException $e) {
-      // Gérer l'exception ici, par exemple enregistrez l'erreur dans un fichier log
-    }
+    return $this->CUDLigne($champs);
   }
 }

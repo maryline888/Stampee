@@ -15,7 +15,7 @@ class EnchereModele
     private $archive;
     private $utilisateur;
 
-    private $enchere_erreurs = [];
+    private $erreurs = [];
 
     /**
      * Constructeur de la classe 
@@ -57,22 +57,22 @@ class EnchereModele
         return $this->enchere_id;
     }
 
-    public function getEnchere_date_debut()
+    public function getDate_debut()
     {
         return $this->date_debut;
     }
 
-    public function getEnchere_date_fin()
+    public function getDate_fin()
     {
         return $this->date_fin;
     }
 
-    public function getEnchere_prix_plancher()
+    public function getPrix_plancher()
     {
         return $this->prix_plancher;
     }
 
-    public function getEnchere_coup_de_coeur_lord()
+    public function getCoup_de_coeur_lord()
     {
         return $this->coup_de_coeur_lord;
     }
@@ -84,7 +84,7 @@ class EnchereModele
 
     public function getErreurs()
     {
-        return $this->enchere_erreurs;
+        return $this->erreurs;
     }
 
     /**
@@ -106,7 +106,10 @@ class EnchereModele
      */
     public function setDate_debut($date_debut)
     {
-        unset($this->enchere_erreurs['date_debut']);
+        unset($this->erreurs['date_debut']);
+        if (!$date_debut) {
+            $this->erreurs['date_debut'] = "Veuillez choisir une date";
+        }
         $this->date_debut = $date_debut;
         return $this;
     }
@@ -118,8 +121,10 @@ class EnchereModele
      */
     public function setDate_fin($date_fin)
     {
-        unset($this->enchere_erreurs['date_fin']);
-
+        unset($this->erreurs['date_fin']);
+        if (!$date_fin) {
+            $this->erreurs['date_fin'] = "Veuillez choisir une date";
+        }
         $this->date_fin = $date_fin;
 
         return $this;
@@ -131,16 +136,10 @@ class EnchereModele
      */
     public function setPrix_plancher($prix_plancher)
     {
-        unset($this->enchere_erreurs['prix_plancher']);
+        unset($this->erreurs['prix_plancher']);
 
         $prix_plancher = str_replace(',', '.', $prix_plancher);
 
-        // Valider la valeur comme un nombre au format monétaire
-        // if (filter_var($prix_plancher, FILTER_VALIDATE_FLOAT) !== false) {
-        //     echo 'La valeur est un nombre au format monétaire valide.';
-        // } else {
-        //     echo 'La valeur n\'est pas un nombre au format monétaire valide.';
-        // }
         $this->prix_plancher = $prix_plancher;
 
         return $this;
@@ -152,7 +151,7 @@ class EnchereModele
      */
     public function setCoup_de_coeur_lord($coup_de_coeur_lord)
     {
-        unset($this->enchere_erreurs['coup_de_coeur_lord']);
+        unset($this->erreurs['coup_de_coeur_lord']);
 
         $this->coup_de_coeur_lord = $coup_de_coeur_lord;
 
@@ -166,7 +165,10 @@ class EnchereModele
      */
     public function setArchive($archive)
     {
-        unset($this->enchere_erreurs['archive']);
+        unset($this->erreurs['archive']);
+        if ($archive == null || $archive == false) {
+            $archive = 0;
+        }
         $this->archive = $archive;
 
         return $this;
