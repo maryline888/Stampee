@@ -208,14 +208,16 @@ em {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 5px;
-    padding: 5px 10px;
+    /* margin-bottom: 5px; */
+    padding: 20px 10px;
     background-color: var(--gris-pale);
     border-radius: var(--border-radius);
     position: relative;
     width: 170px;
-    height: 250px;
+    /* height: 250px; */
     text-align: center;
+    justify-content: center;
+    align-items: center;
 }
 
 .carrousel-conteneur div:hover {
@@ -232,9 +234,37 @@ em {
 
 }
 
+.carrousel-conteneur input {
+    margin-bottom: 20px;
+}
+
 .carrousel-btn {
     justify-content: space-between;
 
+}
+
+.caroussel-btn-lien {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-right: 8px;
+    padding-left: 8px;
+    background-color: var(--rouge);
+    border-radius: var(--border-radius);
+    color: var(--blanc);
+    font-size: clamp(14px, 3vw, var(--font-current));
+
+}
+
+
+.caroussel-btn-lien:hover {
+    background-color: var(--jaune);
+    color: black;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.carrousel-conteneur input {
+    padding: 2px 8px;
 }
 
 .vignette-cote {
@@ -285,6 +315,7 @@ em {
 .timbre-price,
 .timbre-name {
     margin: 0 auto;
+    font-size: .75em;
 }
 
 
