@@ -3,7 +3,6 @@
 /**
  * Classe Contrôleur des requêtes de l'application utilisateur
  */
-// include_once('Routeur.class.php');
 
 class Utilisateur extends Routeur
 {

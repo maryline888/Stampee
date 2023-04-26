@@ -21,6 +21,7 @@ class Routeur
     ["enchereAjout",             "Enchere",        "ajout"],
     ["enchereValidation",        "Enchere",        "validation"],
     ["enchereListe",             "Enchere",        "liste"],
+    ["miseValidation",           "Mise",           "ajouter"],
   ];
 
   protected $oRequetesSQL; // objet RequetesSQL utilisé par tous les contrôleurs
