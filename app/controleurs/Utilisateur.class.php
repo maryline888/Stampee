@@ -67,7 +67,7 @@ class Utilisateur extends Routeur
     }
 
     new Vue(
-      '/vUtilisateursvInscription',
+      '/vUtilisateurs/vInscription',
       array(
         'titre'                  => 'Inscription',
         'erreurs'                => $erreurs
@@ -104,7 +104,7 @@ class Utilisateur extends Routeur
       }
     }
     new Vue(
-      '/vUtilisateurs/vConnexion',
+      'vUtilisateurs/vConnexion',
       array(
         'titre'                  => 'Connexion',
         'oUtilConn'              => $this->oUtilConn,
@@ -132,7 +132,7 @@ class Utilisateur extends Routeur
     $this->oUtilConn = $_SESSION['oUtilConn'];
 
     new Vue(
-      './vUtilisateurs/vUtilisateurProfil',
+      'vUtilisateurs/vUtilisateurProfil',
       array(
         'titre'                  => 'profil',
         'oUtilConn' => $this->oUtilConn,

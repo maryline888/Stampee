@@ -19,9 +19,6 @@ html {
     width: 100%;
 }
 
-body {
-    /* background-color: var(--gris-pale); */
-}
 
 main>* {
     margin-bottom: 60px;
@@ -1645,9 +1642,16 @@ select {
     margin: 40px;
 }
 
+.section-connexion .spanErreur {
+    padding-top: 40px;
+    margin-top: 50px;
+    background-color: var(--jaune);
+    color: var(--rouge);
+}
+
 .section-connexion {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -1677,12 +1681,8 @@ select {
 }
 
 .form-ajout input {
-
     padding: 20;
 }
-
-
-
 
 /* section du formulaire denchaire  */
 .form-ajout,
@@ -1706,7 +1706,6 @@ select {
 .form-ajout input,
 .form-connexion input,
 .form-enchere input {
-    /* //   margin-bottom: 20px; */
     padding: .5em;
     border: transparent;
     border-radius: 8px;
@@ -1716,12 +1715,10 @@ select {
 .form-ajout label,
 .form-connexion label,
 .form-enchere label,
-.form-enchere {
+.form-enchere label {
     margin-top: 10px;
 
 }
-
-
 
 .div-connexion {
     border-radius: var(--border-radius);

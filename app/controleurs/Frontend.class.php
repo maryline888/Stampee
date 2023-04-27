@@ -22,7 +22,7 @@ class Frontend extends Routeur
   }
 
   /**
-   * Lister les films diffusés prochainement
+   * vue pour la page acceuil
    * 
    */
   public function pageAcceuil()
@@ -32,6 +32,27 @@ class Frontend extends Routeur
       array(
         'oUtilConn' => $this->oUtilConn,
         'titre'  => "Stampee",
+
+      ),
+      "vGabarits/gabarit-frontend"
+    );
+  }
+  /**
+   * vue pour la page catalogue 
+   */
+  public function pageCatalogue()
+  {
+
+    new Vue(
+
+
+
+
+
+      "vGabarits/gabarit-catalogue",
+      array(
+        'oUtilConn' => $this->oUtilConn,
+        'titre'  => "Catalogue d'enchères",
 
       ),
       "vGabarits/gabarit-frontend"

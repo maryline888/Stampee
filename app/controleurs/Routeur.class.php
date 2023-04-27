@@ -15,6 +15,7 @@ class Routeur
     // --------------------
     ["",                         "Frontend",       "pageAcceuil"],
     ["#",                        "Frontend",       "pageAcceuil"],
+    ["catalogue",                "Frontend",       "pageCatalogue"],
     ["utilisateurConnexion",     "Utilisateur",    "connexion"],
     ["utilisateurInscription",   "Utilisateur",    "inscription"],
     ['utilisateurDeconnexion',   "Utilisateur",    "deconnexion"],

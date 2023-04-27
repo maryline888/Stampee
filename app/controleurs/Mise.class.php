@@ -9,17 +9,33 @@ class Mise extends Routeur
     private $oUtilConn;
     private $utilisateur_id;
 
-
+    private $messageErreur;
 
     public function __construct()
     {
         $this->oUtilConn = $_SESSION['oUtilConn'] ?? null;
-        $this->utilisateur_id = $this->oUtilConn->utilisateur_id;
+        //   $this->utilisateur_id = $this->oUtilConn->utilisateur_id;
         $this->oRequetesSQL = new RequetesSQL;
+        $this->messageErreur = null;
     }
 
     public function ajouter()
     {
+
+        if (empty($this->utilisateur_id)) {
+            $this->messageErreur = "Vous devez être connecté pour pouvoir miser.";
+
+            new Vue(
+                'vUtilisateurs/vConnexion',
+                array(
+                    'titre'                  => 'Connexion',
+                    'messageErreur'   => $this->messageErreur
+
+                ),
+                'vGabarits/gabarit-frontend'
+            );
+        }
+
         if (!empty($_POST) && $this->utilisateur_id) {
             // var_dump($this->utilisateur_id);
             // echo "<pre>";
