@@ -5,61 +5,58 @@
 		<h1>Plateforme d'enchère</h1>
 
 		<p>{{ messageRetour }}</p>
-		{# sois on laisse action vide et ca retournera dans la fonction ajout de la classe enchere
-																																																																				   sois on ajoute un traitement.php #}
-
-
+		{# sois on laisse action vide et ca retournera dans la fonction ajout de la classe enchere sois on ajoute un traitement.php #}
 		{# ======= ENCHERE ========= #}
 		<label for="date_debut">Date pour la fin de l'enchère</label>
 		<input type="date" id="date_debut" name="date_debut" value="{{ oEnchere.date_debut }}">
-		<span>{{ oEnchere.erreurs.date_debut }}</span>
+		<span>{{ erreurs_enchere.date_debut }}</span>
 
 		<label for="date_fin">Date pour la fin de l'enchère</label>
 		<input type="date" id="date_fin" name="date_fin" value="{{ oEnchere.date_fin }}">
-		<span>{{ oEnchere.erreurs.date_fin }}</span>
+		<span>{{ erreurs_enchere.date_fin }}</span>
 
 		<label>Prix de base pour votre enchère</label>
 		<input name="prix_plancher" value="{{ oEnchere.prix_plancher }}">
-		<span>{{ oEnchere.erreurs.prix_plancher }}</span>
+		<span>{{ erreurs_enchere.prix_plancher }}</span>
 
 		<input type="hidden" name="coup_de_coeur_lord" value="0">
 
 		<input
-		type="hidden" name="archive" value="{{ oEnchere.archive }}">
+		type="hidden" name="archive" value="0">
 
 		{# ======= TIMBRES ========= #}
 		<h1 class="margin-top-petit">Informations concernant votre timbre</h1>
 
 		<label>Nom</label>
 		<input type="text" name="nom" value="{{ oTimbre.nom }}">
-		<span>{{ timbre_erreurs.nom }}</span>
+		<span>{{ erreurs_timbre.nom }}</span>
 
 		<label>Année</label>
 		<input type="text" name="date_creation" value="{{ oTimbre.date_creation }}">
-		<span>{{ timbre_erreurs.date_creation }}</span>
+		<span>{{ erreurs_timbre.date_creation }}</span>
 
 		<label>Couleur</label>
 		<input type="text" name="couleur" value="{{ oTimbre.couleur }}">
-		<span>{{ timbre_erreurs.couleur }}</span>
+		<span>{{ erreurs_timbre.couleur }}</span>
 
 
 		<label>Pays d'origine</label>
 		<input type="text" name="pays_origine" value="{{ oTimbre.pays_origine }}">
-		<span>{{ timbre_erreurs.pays_origine }}</span>
+		<span>{{ erreurs_timbre.pays_origine }}</span>
 
 
 		<label>Tirage
 			<span class="small">optionnel</span>
 		</label>
 		<input type="text" name="tirage" value="{{ oTimbre.tirage }}">
-		<span>{{ timbre_erreurs.tirage }}</span>
+		<span>{{ erreurs_timbre.tirage }}</span>
 
 
 		<label>Quelles sont ses dimensions?
 			<span class="small">en mm</span>
 		</label>
 		<input type="text" name="dimensions" value="{{ oTimbre.dimensions }}">
-		<span>{{ timbre_erreurs.dimensions }}</span>
+		<span>{{ erreurs_timbre.dimensions }}</span>
 
 
 		<label for="certifie">Est-ce qu'il est certifié?</label>
@@ -68,7 +65,7 @@
 			<option value="0" selected>Non</option>
 		</select>
 		<span>&nbsp;{{ oTimbre.certifie }}</span>
-		<span>{{ timbre_erreurs.certifie }}</span>
+		<span>{{ erreurs_timbre.certifie }}</span>
 
 
 		<label>Quel est son état?</label>
@@ -80,7 +77,7 @@
 			<option value="endommage">Endommagé</option>
 		</select>
 		<span>&nbsp;{{ oTimbre.etat }}</span>
-		<span>{{ timbre_erreurs.etat }}</span>
+		<span>{{ erreurs_timbre.etat }}</span>
 
 		{# ======= FILE ========= #}
 		<h1 class="margin-top-petit">Ajout d'images</h1>

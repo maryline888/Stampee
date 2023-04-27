@@ -82,10 +82,10 @@ class EnchereModele
         return $this->archive;
     }
 
-    public function getErreurs()
-    {
-        return $this->erreurs;
-    }
+    // public function getErreurs()
+    // {
+    //     return $this->erreurs;
+    // }
 
     /**
      * Mutateur de la propriété enchere id
@@ -107,13 +107,16 @@ class EnchereModele
     public function setDate_debut($date_debut)
     {
         unset($this->erreurs['date_debut']);
-        if (!$date_debut) {
-            $this->erreurs['date_debut'] = "Veuillez choisir une date";
-        }
+        // if (!isset($date_debut) || strtotime($date_debut) === false) {
+        //     $this->erreurs['date_debut'] = 'La date de début de est invalide.';
+        // } elseif (strtotime($date_debut) < strtotime(date('Y-m-d'))) {
+        //     $this->erreurs['date_debut'] = 'La date de début ne peut pas être avant à la date actuelle.';
+        // } elseif (strtotime($date_debut) < strtotime($this->date_debut)) {
+        //     $this->erreurs['date_debut'] = 'La date de fin de ne peut pas être avant à la date de début.';
+        // }
         $this->date_debut = $date_debut;
         return $this;
     }
-
     /**
      * Mutateur de la propriété date_fin
      * @param int $date_fin
@@ -122,11 +125,14 @@ class EnchereModele
     public function setDate_fin($date_fin)
     {
         unset($this->erreurs['date_fin']);
-        if (!$date_fin) {
-            $this->erreurs['date_fin'] = "Veuillez choisir une date";
-        }
+        // if (!isset($date_fin) || strtotime($date_fin) === false) {
+        //     $this->erreurs['date_fin'] = 'La date de fin de est invalide.';
+        // } elseif (strtotime($date_fin) < strtotime(date('Y-m-d'))) {
+        //     $this->erreurs['date_fin'] = 'La date de fin ne peut pas être avant à la date actuelle.';
+        // } elseif (strtotime($date_fin) < strtotime($this->date_fin)) {
+        //     $this->erreurs['date_fin'] = 'La date de fin de ne peut pas être avant à la date de début.';
+        // }
         $this->date_fin = $date_fin;
-
         return $this;
     }
     /**
@@ -137,9 +143,11 @@ class EnchereModele
     public function setPrix_plancher($prix_plancher)
     {
         unset($this->erreurs['prix_plancher']);
-
+        $regex = '/\d+([.,]\d{1,2})?/';
+        if (!preg_match($regex, $prix_plancher)) {
+            $this->erreurs['prix_plancher'] = "Svp inscrire le montant dans ce format : ex 12.45";
+        }
         $prix_plancher = str_replace(',', '.', $prix_plancher);
-
         $this->prix_plancher = $prix_plancher;
 
         return $this;
@@ -166,9 +174,7 @@ class EnchereModele
     public function setArchive($archive)
     {
         unset($this->erreurs['archive']);
-        if ($archive == null || $archive == false) {
-            $archive = 0;
-        }
+
         $this->archive = $archive;
 
         return $this;

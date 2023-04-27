@@ -1706,12 +1706,22 @@ select {
 .form-ajout input,
 .form-connexion input,
 .form-enchere input {
-    margin-bottom: 20px;
+    /* //   margin-bottom: 20px; */
     padding: .5em;
     border: transparent;
     border-radius: 8px;
 
 }
+
+.form-ajout label,
+.form-connexion label,
+.form-enchere label,
+.form-enchere {
+    margin-top: 10px;
+
+}
+
+
 
 .div-connexion {
     border-radius: var(--border-radius);
@@ -1740,4 +1750,10 @@ select {
 
 .erreur {
     color: red;
+}
+
+
+form>span {
+    color: red;
+    font-size: 10px;
 }

@@ -21,6 +21,7 @@ class RequetesSQL extends RequetesPDO
     $this->sql = "
     SELECT *
     FROM utilisateur
+    JOIN ROLE ON role.role_id = utilisateur.role_id 
     WHERE utilisateur_courriel = :utilisateur_courriel AND utilisateur_mdp = SHA2(:utilisateur_mdp, 512)";
 
     return $this->getLignes($champs, RequetesPDO::UNE_SEULE_LIGNE);
@@ -106,7 +107,8 @@ class RequetesSQL extends RequetesPDO
             date_fin = :date_fin, 
             prix_plancher = :prix_plancher, 
             coup_de_coeur_lord = :coup_de_coeur_lord,
-            archive = :archive';
+            archive = :archive,
+            utilisateur_id = :utilisateur_id';
 
     return $this->CUDLigne($champs);
   }
@@ -119,7 +121,6 @@ class RequetesSQL extends RequetesPDO
    */
   public function ajouterTimbre(array $champs)
   {
-
     $this->sql = '
             INSERT INTO TIMBRE
             SET nom = :nom,
@@ -150,4 +151,19 @@ class RequetesSQL extends RequetesPDO
         timbre_id = :timbre_id';
     return $this->CUDLigne($champs);
   }
+
+  /**
+   * Aller faire une requete pour connaitre le nb de mise sur un timbre donné
+   */
+
+  public function getNombreMise($champs)
+  {
+
+    $this->sql = '
+        SELECT quantite_mises WHERE enchere_id = :enchere_id';
+    return $this->CUDLigne($champs, RequetesPDO::UNE_SEULE_LIGNE);
+  }
+  /**
+   * 
+   */
 }

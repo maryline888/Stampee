@@ -9,6 +9,10 @@ class Enchere extends Routeur
     private $enchere_id;
     private $utilisateur_id;
     private $erreurs;
+    // private $erreurs_enchere;
+    private $oEnchere;
+    private $oTimbre;
+    // private $erreurs_timbre;
     private $messageRetour;
 
     /**
@@ -21,14 +25,15 @@ class Enchere extends Routeur
         $this->oUtilConn = $_SESSION['oUtilConn'] ?? null;
 
         $this->enchere_id;
+
         $this->oRequetesSQL = new RequetesSQL;
     }
 
     public function ajout()
     {
 
-        $this->erreurs = [];
-
+        $erreurs_enchere = [];
+        $erreurs_timbre = [];
         $_POST_enchere = [];
         $_POST_timbre = [];
 
@@ -37,7 +42,8 @@ class Enchere extends Routeur
 
         if (!empty($_POST)) {
 
-
+            print_r($_POST);
+            //condition erreur a ajouter
             $_POST_enchere = [
                 'date_debut'         => $_POST['date_debut'],
                 'date_fin'           => $_POST['date_fin'],
@@ -58,27 +64,31 @@ class Enchere extends Routeur
             ];
 
             $oEnchere = new EnchereModele($_POST_enchere);
+            $erreurs_enchere = $oEnchere->erreurs;
+            // print_r($erreurs_enchere);
 
 
             $oTimbre = new TimbreModele($_POST_timbre);
-
+            $erreurs_timbre = $oTimbre->erreurs;
 
             $oImage = new ImageModele($_FILES);
+            $erreur_image = $oImage->erreurs;
 
             $this->image_id = "";
 
-            if (count($this->erreurs) === 0) {
+            if (count($erreurs_enchere) === 0) {
                 $enchere_id = $this->oRequetesSQL->ajouterEnchere([
                     'date_debut'         => $oEnchere->date_debut,
                     'date_fin'           => $oEnchere->date_fin,
                     'prix_plancher'      => $oEnchere->prix_plancher,
                     'coup_de_coeur_lord' => $oEnchere->coup_de_coeur_lord,
-                    'archive'            => $oEnchere->archive
+                    'archive'            => $oEnchere->archive,
+                    'utilisateur_id'      => $this->oUtilConn->utilisateur_id,
                 ]);
                 $enchere_id = (int)$enchere_id;
             }
 
-            if (count($this->erreurs) === 0 && $enchere_id) {
+            if (count($erreurs_timbre) === 0 && $enchere_id) {
 
                 $timbre_id = $this->oRequetesSQL->ajouterTimbre([
                     'nom'            => $oTimbre->nom,
@@ -108,42 +118,47 @@ class Enchere extends Routeur
                 }
                 if (move_uploaded_file($file_tmp, $target_path)) {
                     // echo 'L\'image à bien été ajoutée.';
-                    $image_id = $this->oRequetesSQL->ajouterImage([
+                    $this->image_id = $this->oRequetesSQL->ajouterImage([
                         'image_url' => $target_path,
                         'timbre_id' => $timbre_id
                     ]);
                 } else {
-                    echo 'Un problème est survenu, veuillez recommencer.';
+                    // echo 'Un problème est survenu, veuillez recommencer.';
                 }
             }
 
-            if ($image_id) {
-                $this->validation();
-            }
+            // if (count($erreur_image) == 0) {
+            //     $this->validation();
+            // }
         }
-
-
+        // app/vues/templates/vEnchere/vEnchereAjout.twig
         new Vue(
-            'vEnchereAjout',
+            'vEncheres/vEnchereAjout',
             array(
+                //cle valeur
                 'oUtilConn' => $this->oUtilConn,
+                'erreurs_timbre' => $erreurs_timbre,
+                'erreurs_enchere' => $erreurs_enchere,
+                'oEnchere' => $this->oEnchere,
+                'oTimbre' => $this->oTimbre
 
             ),
-            'gabarit-frontend'
+            'vGabarits/gabarit-frontend'
         );
     }
-
 
     public function validation()
     {
 
         new Vue(
-            'vEnchereValidation',
+            'vEncheres/vEnchereValidation',
             array(
-                'oUtilConn' => $this->oUtilConn
+                'oUtilConn' => $this->oUtilConn,
+                'oEnchere' => $this->oEnchere,
+                'oTimbre' => $this->oTimbre
 
             ),
-            'gabarit-frontend'
+            'vGabarits/gabarit-frontend'
         );
     }
 }//fin classe

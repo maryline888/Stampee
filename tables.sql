@@ -3,9 +3,24 @@ CREATE TABLE ENCHERE (
   date_debut DATE NOT NULL,
   date_fin DATE NOT NULL,
   prix_plancher DECIMAL(19,2) NOT NULL,
+  offre_actuelle DECIMAL(19,2),
   coup_de_coeur_lord boolean,
   archive boolean NOT NULL,
-  PRIMARY KEY (enchere_id)
+  utilisateur_id SMALLINT UNSIGNED,
+  PRIMARY KEY (enchere_id),
+  FOREIGN KEY (utilisateur_id) REFERENCES UTILISATEUR (utilisateur_id)
+);
+
+CREATE TABLE UTILISATEUR (
+  utilisateur_id SMALLINT UNSIGNED AUTO_INCREMENT,
+  utilisateur_nom VARCHAR (50) NOT NULL,
+  utilisateur_prenom VARCHAR (50) NOT NULL,
+  utilisateur_courriel VARCHAR (100) NOT NULL,
+  utilisateur_mdp VARCHAR (255) NOT NULL,
+  utilisateur_adresse VARCHAR (50) NOT NULL,
+  role_id SMALLINT UNSIGNED,
+  PRIMARY KEY (utilisateur_id),
+  FOREIGN KEY (role_id) REFERENCES ROLE (role_id)
 );
 
 CREATE TABLE IMAGE (
@@ -15,7 +30,6 @@ CREATE TABLE IMAGE (
   FOREIGN KEY (timbre_id) REFERENCES TIMBRE (timbre_id),
   PRIMARY KEY (image_id)
 );
-
 
 CREATE TABLE TIMBRE (
   timbre_id SMALLINT UNSIGNED AUTO_INCREMENT,
@@ -42,7 +56,6 @@ CREATE TABLE ETAT(
   PRIMARY KEY (etat_id)
 );
 
-
 CREATE TABLE FAVORIS(
   utilisateur_id SMALLINT UNSIGNED,
   enchere_id SMALLINT UNSIGNED,
@@ -51,29 +64,17 @@ CREATE TABLE FAVORIS(
   FOREIGN KEY (enchere_id) REFERENCES ENCHERE (enchere_id)
   );
 
+-- date de mise desc 
 CREATE TABLE MISE (
   utilisateur_id SMALLINT UNSIGNED,
   enchere_id SMALLINT UNSIGNED,
   montant DECIMAL(19,2) NOT NULL,
   gagnant SMALLINT UNSIGNED,
-  offre_actuelle DECIMAL(19,2),
   quantite_mises SMALLINT,
   date_mise DATE NOT NULL ,
   PRIMARY KEY (utilisateur_id, enchere_id),
   FOREIGN KEY (utilisateur_id) REFERENCES UTILISATEUR (utilisateur_id),
   FOREIGN KEY (enchere_id) REFERENCES ENCHERE (enchere_id)
-);
-
-CREATE TABLE UTILISATEUR (
-  utilisateur_id SMALLINT UNSIGNED AUTO_INCREMENT,
-  utilisateur_nom VARCHAR (50) NOT NULL,
-  utilisateur_prenom VARCHAR (50) NOT NULL,
-  utilisateur_courriel VARCHAR (100) NOT NULL,
-  utilisateur_mdp VARCHAR (255) NOT NULL,
-  utilisateur_adresse VARCHAR (50) NOT NULL,
-  role_id SMALLINT UNSIGNED,
-  PRIMARY KEY (utilisateur_id),
-  FOREIGN KEY (role_id) REFERENCES ROLE (role_id)
 );
 
 CREATE TABLE ROLE(

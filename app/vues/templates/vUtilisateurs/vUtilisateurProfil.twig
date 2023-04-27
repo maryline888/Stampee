@@ -4,10 +4,8 @@
 <section class="section-profil margin-top-petit">
 	<h3>
 		Bonjour
-
 		{{ oUtilConn.utilisateur_prenom }}
 		{{ oUtilConn.utilisateur_nom }}
-
 	</h3>
 	<p class="messageRetourAction {{ classRetour }}">{{ messageRetourAction }}&nbsp;</p>
 
@@ -22,4 +20,4 @@
 	<a class="btn-lien margin-top-petit" href="enchereAjout">Créer une enchère</a>
 </section>
 
-{{ include("modaleSuppression.twig") }}
+{{ include("vUtilisateurs/modaleSuppression.twig") }}

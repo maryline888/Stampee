@@ -94,10 +94,10 @@ class TimbreModele
   {
     return $this->etat;
   }
-  public function getErreurs()
-  {
-    return $this->erreurs;
-  }
+  // public function getErreurs()
+  // {
+  //   return $this->erreurs;
+  // }
   public function getUtilisateur()
   {
     return $this->utilisateur;

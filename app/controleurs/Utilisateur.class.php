@@ -67,12 +67,12 @@ class Utilisateur extends Routeur
     }
 
     new Vue(
-      'vInscription',
+      '/vUtilisateursvInscription',
       array(
         'titre'                  => 'Inscription',
         'erreurs'                => $erreurs
       ),
-      'gabarit-frontend'
+      'vGabarits/gabarit-frontend'
     );
   }
 
@@ -104,13 +104,14 @@ class Utilisateur extends Routeur
       }
     }
     new Vue(
-      'vConnexion',
+      '/vUtilisateurs/vConnexion',
       array(
         'titre'                  => 'Connexion',
         'oUtilConn'              => $this->oUtilConn,
-        'messageErreurConnexion' => $messageErreurConnexion
+        'messageErreurConnexion' => $messageErreurConnexion,
+
       ),
-      'gabarit-frontend'
+      'vGabarits/gabarit-frontend'
     );
   }
 
@@ -120,15 +121,7 @@ class Utilisateur extends Routeur
   public function deconnexion()
   {
     unset($_SESSION['oUtilConn']);
-    $this->connexion();
-    // new Vue(
-    //   'vPageAcceuil',
-    //   array(
-    //     //  'actionUri'              => 'deconnexion',
-    //   ),
-    //   'gabarit-frontend'
-    // );
-    //  echo json_encode(true);
+    header('Location:' . Routeur::BASE_URI);
   }
 
   public function getProfil()
@@ -139,12 +132,12 @@ class Utilisateur extends Routeur
     $this->oUtilConn = $_SESSION['oUtilConn'];
 
     new Vue(
-      'vUtilisateur',
+      './vUtilisateurs/vUtilisateurProfil',
       array(
         'titre'                  => 'profil',
         'oUtilConn' => $this->oUtilConn,
       ),
-      'gabarit-frontend'
+      'vGabarits/gabarit-frontend'
     );
   }
 
@@ -180,40 +173,12 @@ class Utilisateur extends Routeur
     }
 
     new Vue(
-      'vUtilisateurModif',
+      'vUtilisateurs/vUtilisateurProfil.twig',
       array(
         'titre'     => 'modifier votre profil',
-        //  'actionUri'              => 'deconnexion',
-
-        'oUtilConn' => $this->oUtilConn,
+        'oUtilConn'              => $this->oUtilConn,
       ),
-      'gabarit-frontend'
+      'vGabarits/gabarit-frontend'
     );
   }
-
-
-
-
-
-  // public function gererUtilisateur()
-  // {
-  //   if (isset($_SESSION['oUtilConn'])) {
-  //     $this->oUtilConn = $_SESSION['oUtilConn'];
-  //     $entite = $this->methodes['UtilisateurModele'];
-
-  //     if (isset($this->methodes[$this->entite])) {
-  //       if (isset($this->methodes[$this->entite][$this->action])) {
-  //         $methode = $this->methodes[$this->entite][$this->action];
-  //         $this->$methode();
-  //       } else {
-  //         throw new Exception("$this->action de l'entité $this->entite n'existe pas.");
-  //       }
-  //     } else {
-  //       throw new Exception("L'entité $this->entite n'existe pas.");
-  //     }
-  //   } else {
-  //     $this->connexion();
-  //   }
-  // }
-
 }

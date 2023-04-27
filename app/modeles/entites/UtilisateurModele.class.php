@@ -80,7 +80,7 @@ class UtilisateurModele
         return $this->utilisateur_mdp;
     }
 
-    public function getUtilisateur_roleid()
+    public function getUtilisateur_role_id()
     {
         return $this->role_id;
     }
@@ -90,8 +90,14 @@ class UtilisateurModele
         return $this->erreurs;
     }
 
-
-
+    public function getNom()
+    {
+        return $this->erreurs;
+    }
+    public function getRole_id()
+    {
+        return $this->erreurs;
+    }
 
     /**
      * Mutateur de la propriété utilisateurid 
@@ -113,7 +119,6 @@ class UtilisateurModele
         unset($this->erreurs['utilisateur_nom']);
         $nom = trim($nom);
         $regExp = '/^[a-zÀ-ÖØ-öø-ÿ]{2,}( [a-zÀ-ÖØ-öø-ÿ]{2,})*$/i';
-        // $regExp = '/^\p{L}{2,}( \p{L}{2,})*$/ui'; // regexp équivalente à la précédente
         if (!preg_match($regExp, $nom)) {
             $this->erreurs['utilisateur_nom'] = "Au moins 2 caractères alphabétiques pour chaque mot.";
         }
@@ -198,10 +203,16 @@ class UtilisateurModele
      */
     public function setRole_id($role_id)
     {
-
         unset($this->erreurs['utilisateur.role_id']);
         $role_id = intval($role_id);
         $this->role_id = $role_id;
+        return $this;
+    }
+    public function setNom($nom)
+    {
+        unset($this->erreurs['nom']);
+
+        $this->nom = $nom;
         return $this;
     }
 }

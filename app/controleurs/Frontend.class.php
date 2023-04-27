@@ -28,21 +28,13 @@ class Frontend extends Routeur
   public function pageAcceuil()
   {
     new Vue(
-      "vPageAcceuil",
+      "vGabarits/gabarit-acceuil",
       array(
         'oUtilConn' => $this->oUtilConn,
         'titre'  => "Stampee",
 
       ),
-      "gabarit-frontend"
+      "vGabarits/gabarit-frontend"
     );
-  }
-  /**
-   * Déconnecter un utilisateur
-   */
-  public function deconnexion()
-  {
-    unset($_SESSION['oUtilConn']);
-    echo json_encode('true');
   }
 }

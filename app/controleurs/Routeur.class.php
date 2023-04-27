@@ -9,6 +9,7 @@
 class Routeur
 {
 
+
   private $routes = [
     // uri, classe, méthode
     // --------------------
@@ -74,13 +75,13 @@ class Routeur
     $message = $e->getMessage();
     if ($message == self::ERROR_NOT_FOUND) {
       header('HTTP/1.1 404 Not Found');
-      new Vue('vErreur404', [], 'gabarit-erreur');
+      new Vue('vErreurs/vErreur404', [], 'vGabarits/gabarit-erreur');
     } else {
       header('HTTP/1.1 500 Internal Server Error');
       new Vue(
-        'vErreur500',
+        'vErreurs/vErreur500',
         ['message' => $message, 'fichier' => $e->getFile(), 'ligne' => $e->getLine()],
-        'gabarit-erreur'
+        'vGabarits/gabarit-erreur'
       );
     }
     exit;
