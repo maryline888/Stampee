@@ -7,50 +7,51 @@
 class Mise extends Routeur
 {
     private $oUtilConn;
-    private $utilisateur_id;
+    // private $oMise;
+    // private $montant_max;
+    // private $mise;
 
     private $messageErreur;
 
     public function __construct()
     {
         $this->oUtilConn = $_SESSION['oUtilConn'] ?? null;
-        //   $this->utilisateur_id = $this->oUtilConn->utilisateur_id;
         $this->oRequetesSQL = new RequetesSQL;
-        $this->messageErreur = null;
+        $this->messageErreur;
     }
 
     public function ajouter()
     {
+        if (!empty($_POST) && $this->oUtilConn) {
 
-        if (empty($this->utilisateur_id)) {
-            $this->messageErreur = "Vous devez être connecté pour pouvoir miser.";
+            $enchere_id = (int)$_POST['enchere_id'];
+            $mise = $_POST['montant'];
+            $$mise = (float)$mise;
+            $offre_actuelle =  $this->oRequetesSQL->getPrix($enchere_id);
+            $offre_actuelle = (float)$offre_actuelle['maximum'];
 
-            new Vue(
-                'vUtilisateurs/vConnexion',
-                array(
-                    'titre'                  => 'Connexion',
-                    'messageErreur'   => $this->messageErreur
+            // var_dump($offre_actuelle);
+            // var_dump('offre', $offre_actuelle);
 
-                ),
-                'vGabarits/gabarit-frontend'
-            );
-        }
-
-        if (!empty($_POST) && $this->utilisateur_id) {
-            // var_dump($this->utilisateur_id);
             // echo "<pre>";
-            // print_r($_POST);
-            // die;
-            $oMise = new MiseModele();
+            // print_r($mise);
+            // var_dump($mise);
+            if ($mise > $offre_actuelle) {
+                $oMise = new MiseModele($_POST);
+                // var_dump($_POST);
 
-
-            // si qt mise == 0 alors valider le prix le prix plancher denchere else aller a mise actuelle
-            // valider mise plus élevé que la mise_actuelle 
-            // gerer la date de la mise = envoyer la date d'aujourdhui dans la bd   date()
-
-            $nb_mise = $this->oRequetesSQL->getNombreMise();
+                $this->oRequetesSQL->ajouterMise([
+                    'utilisateur_id' => $this->oUtilConn->utilisateur_id,
+                    'enchere_id'    => $oMise->enchere_id,
+                    'montant'       => $oMise->montant,
+                    'date_mise'     => $oMise->date_mise
+                ]);
+            } else {
+                $this->erreurMise();
+            }
         }
     }
+
 
 
 
@@ -67,5 +68,12 @@ class Mise extends Routeur
         //     ),
         //     'vGabarits/gabarit-frontend'
         //   );
+    }
+
+
+
+    public function erreurMise()
+    {
+        echo "erreur sur le montant";
     }
 }//fin class

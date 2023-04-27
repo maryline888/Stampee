@@ -315,6 +315,9 @@ em {
     font-size: .75em;
 }
 
+.timbre-price span {
+    color: red;
+}
 
 @media screen and (max-width: 800px) {
     .carrousel h1 {
@@ -1645,7 +1648,7 @@ select {
 .section-connexion .spanErreur {
     padding-top: 40px;
     margin-top: 50px;
-    background-color: var(--jaune);
+    /* background-color: var(--jaune); */
     color: var(--rouge);
 }
 

@@ -16,6 +16,7 @@ class Routeur
     ["",                         "Frontend",       "pageAcceuil"],
     ["#",                        "Frontend",       "pageAcceuil"],
     ["catalogue",                "Frontend",       "pageCatalogue"],
+    ["catalogueEncheres",        "Frontend",       "pageCatalogue"],
     ["utilisateurConnexion",     "Utilisateur",    "connexion"],
     ["utilisateurInscription",   "Utilisateur",    "inscription"],
     ['utilisateurDeconnexion',   "Utilisateur",    "deconnexion"],
@@ -23,7 +24,8 @@ class Routeur
     ["enchereAjout",             "Enchere",        "ajout"],
     ["enchereValidation",        "Enchere",        "validation"],
     ["enchereListe",             "Enchere",        "liste"],
-    ["miseValidation",           "Mise",           "ajouter"],
+    ["miseValidation",           "Mise",           "validation"],
+    ["miseAjout",                "Mise",           "ajouter"]
   ];
 
   protected $oRequetesSQL; // objet RequetesSQL utilisé par tous les contrôleurs

@@ -10,10 +10,9 @@ class MiseModele
     private $utilisateur_id; //fk 
     private $enchere_id; //fk
     private $montant;
-    private $gagnant;
     private $offre_actuelle;
-    private $quantite_mises;
     private $date_mise;
+    private $erreurs;
 
     /**
      * Constructeur de la classe 
@@ -60,29 +59,16 @@ class MiseModele
 
     public function getMontant()
     {
-
-
         return $this->montant;
-    }
-
-    public function getGagnant()
-    {
-        return $this->gagnant;
-    }
-
-    public function getOffre_actuelle()
-    {
-        return $this->offre_actuelle;
-    }
-
-    public function getQuantite_mises()
-    {
-        return $this->quantite_mises;
     }
 
     public function getDate_mise()
     {
         return $this->date_mise;
+    }
+    public function getErreurs()
+    {
+        return $this->erreurs;
     }
 
     // setters
@@ -101,7 +87,7 @@ class MiseModele
         unset($this->erreurs['enchere_id']);
 
 
-        $this->enchere_id = $enchere_id;
+        $this->enchere_id = (int)$enchere_id;
         return $this;
     }
 
@@ -118,39 +104,24 @@ class MiseModele
         return $this;
     }
 
-    public function setGagnant($gagnant)
-    {
-        unset($this->gagnant['gagnant']);
-
-
-        $this->gagnant = $gagnant;
-        return $this;
-    }
-
     public function setOffre_actuelle($offre_actuelle)
     {
         unset($this->offre_actuelle['offre_actuelle']);
-
+        // if (!$offre_actuelle) {
+        //     $this->erreurs['offre_actuelle'] = "Veuillez inscrire un montant avant de miser";
+        // }
 
         $this->offre_actuelle = $offre_actuelle;
-        return $this;
-    }
-
-    public function setQuantite_mises($quantite_mises)
-    {
-        unset($this->quantite_mises['quantite_mises']);
-
-
-        $this->quantite_mises = $quantite_mises;
         return $this;
     }
 
     public function setDate_mise($date_mise)
     {
         unset($this->date_mise['date_mise']);
-
-
-        $this->date_mise = $date_mise;
+        if (!$date_mise) {
+            $this->erreurs['date_mise'] = 'erreur';
+        }
+        $this->date_mise = date('Y-m-d H:i:s');
         return $this;
     }
 }//fin class

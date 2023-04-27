@@ -1,5 +1,6 @@
 <section class="section-enchere margin-top-petit">
-	<form enctype="multipart/form-data" class="form-enchere" action="" method="POST">
+
+	<form enctype="multipart/form-data" class="form-enchere" action="" method="post">
 
 		<input type="hidden" name="utilisateur_id" value="{{ oUtilConn.utilisateur_id }}">
 		<h1>Plateforme d'enchère</h1>
@@ -66,18 +67,6 @@
 		</select>
 		<span>&nbsp;{{ oTimbre.certifie }}</span>
 		<span>{{ erreurs_timbre.certifie }}</span>
-
-
-		<label>Quel est son état?</label>
-		<select id="etat" name="etat">
-			<option value="parfaite">Parfaite</option>
-			<option value="excellente">Excellente</option>
-			<option value="bonne">Bonne</option>
-			<option value="moyenne">Moyenne</option>
-			<option value="endommage">Endommagé</option>
-		</select>
-		<span>&nbsp;{{ oTimbre.etat }}</span>
-		<span>{{ erreurs_timbre.etat }}</span>
 
 		{# ======= FILE ========= #}
 		<h1 class="margin-top-petit">Ajout d'images</h1>

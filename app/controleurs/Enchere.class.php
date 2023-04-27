@@ -3,7 +3,6 @@
 class Enchere extends Routeur
 {
 
-
     private $oUtilConn;
     private $image_id;
     private $enchere_id;
@@ -12,6 +11,7 @@ class Enchere extends Routeur
     // private $erreurs_enchere;
     private $oEnchere;
     private $oTimbre;
+    private $oImage;
     // private $erreurs_timbre;
     private $messageRetour;
 
@@ -25,7 +25,7 @@ class Enchere extends Routeur
         $this->oUtilConn = $_SESSION['oUtilConn'] ?? null;
 
         $this->enchere_id;
-
+        $this->messageRetour;
         $this->oRequetesSQL = new RequetesSQL;
     }
 
@@ -42,7 +42,7 @@ class Enchere extends Routeur
 
         if (!empty($_POST)) {
 
-            print_r($_POST);
+            //   print_r($_POST);
             //condition erreur a ajouter
             $_POST_enchere = [
                 'date_debut'         => $_POST['date_debut'],
@@ -59,14 +59,12 @@ class Enchere extends Routeur
                 'tirage'         => $_POST['tirage'],
                 'dimensions'     => $_POST['dimensions'],
                 'certifie'       => $_POST['certifie'],
-                'etat'           => $_POST['etat'],
                 'utilisateur'    => $_POST['utilisateur_id']
             ];
 
             $oEnchere = new EnchereModele($_POST_enchere);
             $erreurs_enchere = $oEnchere->erreurs;
             // print_r($erreurs_enchere);
-
 
             $oTimbre = new TimbreModele($_POST_timbre);
             $erreurs_timbre = $oTimbre->erreurs;
@@ -98,7 +96,6 @@ class Enchere extends Routeur
                     'tirage'         => $oTimbre->tirage,
                     'dimensions'     => $oTimbre->dimensions,
                     'certifie'       => $oTimbre->certifie,
-                    'etat'           => $oTimbre->etat,
                     'enchere_id'      => $enchere_id,
                     'utilisateur'     => $this->oUtilConn->utilisateur_id,
 
@@ -111,27 +108,28 @@ class Enchere extends Routeur
                 $file_tmp = $_FILES["userfile"]["tmp_name"];
                 $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
                 $image_name = uniqid() . '.' . $file_ext;
-                $uploads_folder = __DIR__ . '/../../uploads/';
+                $uploads_folder = './uploads/';
+                // $uploads_folder = '/../../uploads/';
                 $target_path = $uploads_folder . $image_name;
-                if (!is_dir($uploads_folder)) {
-                    mkdir($uploads_folder, 0755, true);
-                }
+
                 if (move_uploaded_file($file_tmp, $target_path)) {
+                    // var_dump('target', $target_path);
+                    // var_dump('file_tmp', $file_tmp);
+                    // var_dump('timbreID', $timbre_id);
                     // echo 'L\'image à bien été ajoutée.';
                     $this->image_id = $this->oRequetesSQL->ajouterImage([
                         'image_url' => $target_path,
                         'timbre_id' => $timbre_id
                     ]);
-                } else {
-                    // echo 'Un problème est survenu, veuillez recommencer.';
+                    // si toutes les insertions sont fait alors on envoie a la methode validation
+                    $this->validation();
+                    exit;
+                    // } else {
+                    //     $messageRetour = 'Un problème est survenu, veuillez recommencer.';
+                    // }
                 }
             }
-
-            // if (count($erreur_image) == 0) {
-            //     $this->validation();
-            // }
         }
-        // app/vues/templates/vEnchere/vEnchereAjout.twig
         new Vue(
             'vEncheres/vEnchereAjout',
             array(
@@ -141,13 +139,17 @@ class Enchere extends Routeur
                 'erreurs_enchere' => $erreurs_enchere,
                 'oEnchere' => $this->oEnchere,
                 'oTimbre' => $this->oTimbre
+                // 'messageRetour' => $this->messageRetour
 
             ),
             'vGabarits/gabarit-frontend'
         );
     }
 
-    public function validation()
+    /**
+     * function qui affiche pour le moment une vue différente lors de l'insertion d'une enchère
+     */
+    function validation()
     {
 
         new Vue(
@@ -155,10 +157,22 @@ class Enchere extends Routeur
             array(
                 'oUtilConn' => $this->oUtilConn,
                 'oEnchere' => $this->oEnchere,
-                'oTimbre' => $this->oTimbre
+                'oTimbre' => $this->oTimbre,
+                'oImage' => $this->oImage
 
             ),
             'vGabarits/gabarit-frontend'
         );
+    }
+
+
+
+
+
+    /**
+     * fonction lister UNE enchère
+     */
+    function listerUneEnchere($enchere_id)
+    {
     }
 }//fin classe

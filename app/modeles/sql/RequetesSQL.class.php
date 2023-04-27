@@ -130,7 +130,6 @@ class RequetesSQL extends RequetesPDO
             tirage = :tirage,
             dimensions = :dimensions,
             certifie = :certifie,
-            etat = :etat,
             enchere_id = :enchere_id,
             utilisateur = :utilisateur';
     return $this->CUDLigne($champs);
@@ -152,18 +151,45 @@ class RequetesSQL extends RequetesPDO
     return $this->CUDLigne($champs);
   }
 
+
   /**
-   * Aller faire une requete pour connaitre le nb de mise sur un timbre donné
+   * Afficher toutes les encheres  
    */
 
-  public function getNombreMise($champs)
+  // public function afficherEncheres()
+  // {
+  // }
+  /**
+   * afficher image dans le simili-carrousel encheres en cours
+   */
+  public function afficherImages()
   {
 
-    $this->sql = '
-        SELECT quantite_mises WHERE enchere_id = :enchere_id';
-    return $this->CUDLigne($champs, RequetesPDO::UNE_SEULE_LIGNE);
+    $this->sql = 'SELECT image_url, timbre.timbre_id, nom, enchere.enchere_id, enchere.date_debut, enchere.prix_plancher FROM TIMBRE JOIN IMAGE ON timbre.timbre_id = image.timbre_id JOIN ENCHERE ON timbre.enchere_id = enchere.enchere_id ORDER BY enchere.enchere_id DESC
+    ';
+    return $this->getLignes();
   }
   /**
-   * 
+   * Afficher UNE enchere 
    */
+  public function afficherUneEnchere($enchere_id)
+  {
+  }
+
+  /**
+   * miser
+   */
+
+  public function ajouterMise(array $champs)
+  {
+    $this->sql = 'INSERT INTO MISE SET utilisateur_id = :utilisateur_id, enchere_id = :enchere_id, montant = :montant, date_mise = :date_mise';
+    return $this->CUDLigne($champs);
+  }
+
+
+  public function getPrix($enchere_id)
+  {
+    $this->sql = 'SELECT MAX(montant) as maximum FROM MISE WHERE enchere_id = :enchere_id';
+    return $this->getLignes(['enchere_id' => $enchere_id], RequetesPDO::UNE_SEULE_LIGNE);
+  }
 }
