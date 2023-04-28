@@ -3,7 +3,6 @@ CREATE TABLE ENCHERE (
   date_debut DATE NOT NULL,
   date_fin DATE NOT NULL,
   prix_plancher DECIMAL(19,2) NOT NULL,
-  offre_actuelle DECIMAL(19,2),
   coup_de_coeur_lord boolean,
   archive boolean NOT NULL,
   utilisateur_id SMALLINT UNSIGNED,
@@ -66,13 +65,12 @@ CREATE TABLE FAVORIS(
 
 -- date de mise desc 
 CREATE TABLE MISE (
+  mise_id SMALLINT UNSIGNED,
   utilisateur_id SMALLINT UNSIGNED,
   enchere_id SMALLINT UNSIGNED,
   montant DECIMAL(19,2) NOT NULL,
-  gagnant SMALLINT UNSIGNED,
-  quantite_mises SMALLINT,
   date_mise DATE NOT NULL ,
-  PRIMARY KEY (utilisateur_id, enchere_id),
+  PRIMARY KEY (mise_id),
   FOREIGN KEY (utilisateur_id) REFERENCES UTILISATEUR (utilisateur_id),
   FOREIGN KEY (enchere_id) REFERENCES ENCHERE (enchere_id)
 );
@@ -86,19 +84,27 @@ CREATE TABLE ROLE(
 INSERT INTO `UTILISATEUR` (`utilisateur_id`, `utilisateur_nom`, `utilisateur_prenom`, `utilisateur_courriel`, `utilisateur_mdp`, `utilisateur_adresse`, `role_id`) VALUES
 (1, 'admintes', 'test', 'test@test.ca', 'fb86376cb7bfd6553d365f1e9da9886c18d2b3adc19016202d0e32457e145d2b43cefeb08b3a871bc336048e1d62db32d88f3ad21d7231dc48922836bdb41855', '123 rue allo montreal qc canada', 1),
 (2, 'Cartier', 'Jean', 'jeancartier@mail.ca', 'fb86376cb7bfd6553d365f1e9da9886c18d2b3adc19016202d0e32457e145d2b43cefeb08b3a871bc336048e1d62db32d88f3ad21d7231dc48922836bdb41855', '111 jeantalon montreal qc can ', 2),
-(3, 'mari', 'leblanc', 'mari@leblanc.ca', '1f6f37c530c775842dc907ec3553edaf5d7d08c8327c78359312822e4e9adcebd0475cc92d02bd8d25952ba1c2f6da4b3ce5546618dec93059e2d6611118f466', '123 djeje mejejd', 2);
-(5, 'gagner', 'Ella', 'ella@elle.ca', '1f6f37c530c775842dc907ec3553edaf5d7d08c8327c78359312822e4e9adcebd0475cc92d02bd8d25952ba1c2f6da4b3ce5546618dec93059e2d6611118f466', 'mandeville', 2),
 
 INSERT INTO ROLE VALUES ('2', 'client'), ('1', 'administrateur');
 
-INSERT INTO `ETAT` (`etat_id`, `nom`, `timbre_id`) VALUES
-(1, 'parfaite', NULL),
-(2, 'excellente', NULL),
-(3, 'bonne', NULL),
-(4, 'moyenne', NULL),
-(5, 'endommagé', NULL);
+
 
 INSERT INTO `ROLE` (`role_id`, `nom`) VALUES
 (1, 'administrateur'),
 (2, 'client');
 
+
+ALTER TABLE `MISE`
+  ADD PRIMARY KEY (`mise_id`),
+  ADD KEY `utilisateur_id` (`utilisateur_id`),
+  ADD KEY `enchere_id` (`enchere_id`);
+
+
+ALTER TABLE `MISE`
+  MODIFY `mise_id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+
+ALTER TABLE `MISE`
+  ADD CONSTRAINT `mise_ibfk_1` FOREIGN KEY (`utilisateur_id`) REFERENCES `UTILISATEUR` (`utilisateur_id`),
+  ADD CONSTRAINT `mise_ibfk_2` FOREIGN KEY (`enchere_id`) REFERENCES `ENCHERE` (`enchere_id`);
+COMMIT;

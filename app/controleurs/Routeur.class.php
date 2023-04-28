@@ -23,7 +23,7 @@ class Routeur
     ["utilisateurProfil",        "Utilisateur",    "getProfil"],
     ["enchereAjout",             "Enchere",        "ajout"],
     ["enchereValidation",        "Enchere",        "validation"],
-    ["enchereListe",             "Enchere",        "liste"],
+    ["enchereListe",             "Frontend",       "pageCatalogue"],
     ["miseValidation",           "Mise",           "validation"],
     ["miseAjout",                "Mise",           "ajouter"]
   ];

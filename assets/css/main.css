@@ -1645,14 +1645,14 @@ select {
     margin: 40px;
 }
 
-.section-connexion .spanErreur {
+/* .section-connexion .spanErreur {
     padding-top: 40px;
     margin-top: 50px;
-    /* background-color: var(--jaune); */
+    /* background-color: var(--jaune); 
     color: var(--rouge);
-}
+} */
 
-.section-connexion {
+/* .section-connexion {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -1660,9 +1660,9 @@ select {
     align-items: center;
     gap: 30px;
     font-family: 'Montserrat', sans-serif;
-}
+} */
 
-.section-connexion h1,
+/* .section-connexion h1, */
 .section-ajout h1,
 .section-enchere h1 {
     margin-bottom: 20px;
@@ -1678,18 +1678,18 @@ select {
     margin: 20px;
 }
 
-.form-ajout input[type='date'],
+/* .form-ajout input[type='date'],
 .form-ajout select {
     width: 25%;
 }
 
 .form-ajout input {
     padding: 20;
-}
+} */
 
 /* section du formulaire denchaire  */
 .form-ajout,
-.form-connexion,
+/* .form-connexion, */
 .form-enchere {
     background-color: var(--gris-pale);
     display: flex;
@@ -1702,12 +1702,12 @@ select {
 
 }
 
-.form-connexion {
+/* .form-connexion {
     margin-top: 20px;
-}
+} */
 
 .form-ajout input,
-.form-connexion input,
+/* .form-connexion input, */
 .form-enchere input {
     padding: .5em;
     border: transparent;
@@ -1716,14 +1716,13 @@ select {
 }
 
 .form-ajout label,
-.form-connexion label,
-.form-enchere label,
+/* .form-connexion label, */
 .form-enchere label {
     margin-top: 10px;
 
 }
 
-.div-connexion {
+/* .div-connexion {
     border-radius: var(--border-radius);
     background-color: var(--gris-pale);
     padding: 50px;
@@ -1734,7 +1733,7 @@ select {
 
     align-items: left;
     justify-content: left;
-}
+} */
 
 .div-connexion p {
     margin-bottom: 40px;
@@ -1756,4 +1755,108 @@ select {
 form>span {
     color: red;
     font-size: 10px;
+}
+
+
+
+
+
+/* **************** */
+
+/* Styles pour la section principale */
+.section-connexion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 3rem;
+    padding: 20px;
+
+
+}
+
+/* Styles pour les formulaires */
+.form-connexion,
+.div-connexion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.21);
+    width: 100%;
+    max-width: 350px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form-connexion {
+    margin-right: 20px;
+}
+
+.div-connexion {
+    margin-left: 20px;
+}
+
+/* Styles pour les labels et les champs de saisie */
+.form-connexion h1,
+.div-connexion h1 {
+    color: #212529;
+    margin-bottom: 20px;
+    font-size: var(--font-tall);
+}
+
+.form-connexion label,
+.form-connexion input {
+    width: 100%;
+}
+
+.form-connexion label,
+.form-connexion input,
+.div-connexion h1,
+.div-connexion a {
+    margin-bottom: 20px;
+}
+
+.form-connexion input {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: var(--border-radius);
+    transition: border-color 0.3s;
+}
+
+.form-connexion input:focus {
+    border-color: #007bff;
+}
+
+
+/* Styles pour les messages d'erreur */
+.erreur,
+.spanErreur {
+    color: #dc3545;
+    font-size: 12px;
+}
+
+/* Responsive design pour les appareils mobiles */
+@media screen and (max-width: 767px) {
+    .section-connexion {
+        flex-direction: column;
+    }
+
+    .form-connexion,
+    .div-connexion {
+        max-width: none;
+        width: 100%;
+        margin: 20px 0;
+    }
+
+
+
+    .form-connexion {
+        margin-right: 0;
+    }
+
+    .div-connexion {
+        margin-left: 0;
+    }
 }

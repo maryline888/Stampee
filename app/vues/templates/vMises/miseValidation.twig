@@ -1,0 +1,14 @@
+<section class="section-profil">
+	<h5>
+		{% if messageRetour is not empty %}
+			{{ messageRetour }}
+		{% else %}
+			Merci vous avez misé
+			{{ oMise.montant }}$
+		{% endif %}
+	</h5>
+	<div class="section-profil">
+		<a href="enchereListe" id="utilisateur" class"">Voir toutes les enchères</a><br>
+		<a href="utilisateurProfil" id="utilisateur" class"">Retourner à votre profil</a>
+	</div>
+</section>

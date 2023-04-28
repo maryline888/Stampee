@@ -46,7 +46,10 @@ class MiseModele
         $setProperty = 'set' . ucfirst($prop);
         $this->$setProperty($val);
     }
-
+    public function getMise_id()
+    {
+        return $this->mise_id;
+    }
     public function getUtilisateur_id()
     {
         return $this->utilisateur_id;
@@ -72,7 +75,14 @@ class MiseModele
     }
 
     // setters
+    public function setMise_id($mise_id)
+    {
+        unset($this->erreurs['mise_id']);
 
+
+        $this->mise_id = $mise_id;
+        return $this;
+    }
     public function setUtilisateur_id($utilisateur_id)
     {
         unset($this->erreurs['utilisateur_id']);
@@ -91,18 +101,30 @@ class MiseModele
         return $this;
     }
 
+    // public function setMontant($montant)
+    // {
+    //     unset($this->erreurs['montant']);
+    //     $montant = strval($montant);
+    //     $montant = str_replace(',', '.', $montant);
+    //     $montant = (float)$montant;
+    //     if (!$montant) {
+    //         $this->erreurs['montant'] = "Veuillez inscrire un montant avant de miser";
+    //     }
+    //     $this->montant = $montant;
+    //     return $this;
+    // }
     public function setMontant($montant)
     {
         unset($this->erreurs['montant']);
-        $montant = (int)$montant;
-        $montant = trim($montant);
-        $montant = str_replace(',', '.', $montant);
+        $montant = filter_var($montant, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $montant = floatval(str_replace(',', '.', $montant));
         if (!$montant) {
             $this->erreurs['montant'] = "Veuillez inscrire un montant avant de miser";
         }
         $this->montant = $montant;
         return $this;
     }
+
 
     public function setOffre_actuelle($offre_actuelle)
     {

@@ -165,7 +165,11 @@ class RequetesSQL extends RequetesPDO
   public function afficherImages()
   {
 
-    $this->sql = 'SELECT image_url, timbre.timbre_id, nom, enchere.enchere_id, enchere.date_debut, enchere.prix_plancher FROM TIMBRE JOIN IMAGE ON timbre.timbre_id = image.timbre_id JOIN ENCHERE ON timbre.enchere_id = enchere.enchere_id ORDER BY enchere.enchere_id DESC
+    $this->sql = 'SELECT image_url, timbre.timbre_id, nom, enchere.enchere_id, enchere.date_fin, enchere.prix_plancher 
+    FROM TIMBRE 
+    JOIN IMAGE ON timbre.timbre_id = image.timbre_id 
+    JOIN ENCHERE ON timbre.enchere_id = enchere.enchere_id 
+    ORDER BY enchere.enchere_id DESC
     ';
     return $this->getLignes();
   }

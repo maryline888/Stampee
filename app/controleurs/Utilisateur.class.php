@@ -124,6 +124,10 @@ class Utilisateur extends Routeur
     header('Location:' . Routeur::BASE_URI);
   }
 
+  /**
+   * Profil membre, admin 
+   * développement de base
+   */
   public function getProfil()
   {
     if (count($_POST) !== 0) {
