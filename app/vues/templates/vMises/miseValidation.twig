@@ -1,7 +1,7 @@
 <section class="section-profil">
 	<h5>
-		{% if messageRetour is not empty %}
-			{{ messageRetour }}
+		{% if messageErreur is not empty %}
+			{{ messageErreur }}
 		{% else %}
 			Merci vous avez misé
 			{{ oMise.montant }}$

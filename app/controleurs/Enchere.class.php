@@ -8,11 +8,9 @@ class Enchere extends Routeur
     private $enchere_id;
     private $utilisateur_id;
     private $erreurs;
-    // private $erreurs_enchere;
     private $oEnchere;
     private $oTimbre;
     private $oImage;
-    // private $erreurs_timbre;
     private $messageRetour;
 
     /**
@@ -37,10 +35,8 @@ class Enchere extends Routeur
         $_POST_enchere = [];
         $_POST_timbre = [];
 
-
         // si post is empty = il va montrer direct la vue vEnchereAjout
-
-        if (!empty($_POST)) {
+        if (!empty($_POST) && $this->oUtilConn) {
 
             //   print_r($_POST);
             //condition erreur a ajouter
@@ -109,14 +105,9 @@ class Enchere extends Routeur
                 $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
                 $image_name = uniqid() . '.' . $file_ext;
                 $uploads_folder = './uploads/';
-                // $uploads_folder = '/../../uploads/';
                 $target_path = $uploads_folder . $image_name;
 
                 if (move_uploaded_file($file_tmp, $target_path)) {
-                    // var_dump('target', $target_path);
-                    // var_dump('file_tmp', $file_tmp);
-                    // var_dump('timbreID', $timbre_id);
-                    // echo 'L\'image à bien été ajoutée.';
                     $this->image_id = $this->oRequetesSQL->ajouterImage([
                         'image_url' => $target_path,
                         'timbre_id' => $timbre_id
@@ -165,8 +156,12 @@ class Enchere extends Routeur
         );
     }
 
-
-
+    /**
+     * fonction qui affiche les coups de coeurs du Lord
+     */
+    function listerCoupDeCoeur()
+    {
+    }
 
 
     /**

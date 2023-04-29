@@ -3,17 +3,19 @@
 </script>
 
 {% if oUtilConn %}
+	{# <section class="section-profil margin-top-petit"> #}
 	<section class="section-profil margin-top-petit">
-		<h3>
+		<h1>
 			Bonjour
+			<br>
 			{{ oUtilConn.utilisateur_prenom }}
 			{{ oUtilConn.utilisateur_nom }}
-		</h3>
+		</h1>
 		<p class="messageRetourAction {{ classRetour }}">{{ messageRetourAction }}&nbsp;</p>
 
-		<h4>Courriel</h4><br>
+		<h1>Courriel</h1><br>
 		<p>{{ oUtilConn.utilisateur_courriel }}</p>
-		<h4>Adresse</h4><br>
+		<h1>Adresse</h1><br>
 		<p>{{ oUtilConn.utilisateur_adresse }}</p>
 		<a class="btn margin-top-petit" href="utilisateurModifier">Modifier mon profil</a><br>
 		<a class="btn" href="utilisateurSupprimer {{ oUtilConn.utilisateur_id }}">Supprimer mon profil</a>
@@ -21,4 +23,3 @@
 		<a class="btn-lien margin-top-petit" href="enchereAjout">Créer une enchère</a>
 	</section>
 {% endif %}
-{{ include("vUtilisateurs/modaleSuppression.twig") }}

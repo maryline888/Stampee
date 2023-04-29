@@ -18,10 +18,11 @@
 		<input name="trigger" id="nav-trigger" type="checkbox">
 		<header class="header">
 			<nav role="menubar" class="nav-haut">
-				<ul role="menu">
-					<li role="presentation">
-						<a role="menuitem" href=".">Lord Stampee</a>
-					</li>
+				<ul
+					role="menu">
+					{# <li role="presentation">
+											<a role="menuitem" href=".">Lord Stampee</a>
+										</li> #}
 					<li role="presentation">
 						<a role="menuitem" href="#">Aide</a>
 					</li>
@@ -31,6 +32,10 @@
 					</li>
 					<li role="presentation">
 						<a role="menuitem" href="utilisateurConnexion" class="{{ oUtilConn ? 'cache' : '' }}">Se connecter
+						</a>
+					</li>
+					<li role="presentation">
+						<a role="menuitem" href="enchereAjout" class="{{ not oUtilConn ? 'cache' : '' }}">Créer une enchère
 						</a>
 					</li>
 					<li role="presentation">

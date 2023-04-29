@@ -2,7 +2,7 @@
 	<img src="assets/images/hero800.webp" alt="Description de l'image">
 	<div class="hero-texte-img">
 		<p>"Pour les collections, par les collectionneurs. Des millions de listes provenant des vendeurs de
-								timbres les plus fiables dans le monde."</p>
+																																																																							timbres les plus fiables dans le monde."</p>
 	</div>
 </section>
 
@@ -18,37 +18,34 @@
 </header>
 <section class="carrousel margin-bt space">
 	<h1>Les enchères actuelles</h1>
-	<div class="carrousel-btn">
-		<span class="prec-btn">
-			<img src="assets/images/materialui-left.svg" width=" 32" height=" 32" alt="fleche qui point à gauche" class="survol">
-		</span>
-		<span class="suiv-btn "><img class="survol" src="assets/images/materialui.svg" width="32" height="32" alt="fleche qui point à droite"></span>
+	<div
+		class="carrousel-btn">{# <span class="prec-btn">
+																																				<img src="assets/images/materialui-left.svg" width=" 32" height=" 32" alt="fleche qui point à gauche" class="survol">
+																																			</span>
+																																			<span class="suiv-btn "><img class="survol" src="assets/images/materialui.svg" width="32" height="32" alt="fleche qui point à droite"></span> #}
 	</div>
 	<div class="carrousel-conteneur">
 		{% for enchere in encheres %}
 			<div>
-				<img src="{{ enchere.image_url }}" loading="lazy" alt="{{ uneEnchere.nom }}">
+				<img src="{{ enchere.image_url }}" loading="lazy" alt="{{ enchere.nom }}">
 				<div>
 					<p class="timbre-name">{{ enchere.nom }}</p>
-
-
-					{% if oMise.montant %}
-						<p class="timbre-price">Mise actuelle :</p>
-						<span>{{ oMise.montant }}</span>
+					<p class="timbre-price">Mise actuelle :</p>
+					{% if mise.montant is not empty %}
+						<span>{{ mise.montant }}</span>
 					{% else %}
-						<p class="timbre-price">Mise actuelle :</p>
 						<span>{{ enchere.prix_plancher }}</span>
 					{% endif %}
 				</p>
 
 			</p>
 		</div>
-		{% if oUtilConn %}
+		{% if oUtilConn and enchere.utilisateur_id != oUtilConn.utilisateur_id %}
 			<form action="miseAjout" method="POST">
-				<input aria-label="text" type="text" name="montant" value="{{ mise.montant }}" placeholder="Montant de votre mise">
+				<input aria-label="text" type="text" name="montant" value="{{ mise.montant }}" placeholder="$">
 				<input type="hidden" name="date_mise" value="{{ mise.date_mise }}">
 				<input type="hidden" name="enchere_id" value="{{ enchere.enchere_id }}">
-				<input type="submit" value="MISER" class="caroussel-btn-lien">
+				<input type="submit" value="Miser" class="caroussel-btn-lien">
 			</form>
 		{% endif %}
 	</div>
@@ -62,7 +59,7 @@
 	<h1>Vendeurs de confiance</h1>
 	<p>
 		STAMPEE reçoit plus de 200 collections par année! Chaque achat est couvert par la protection
-																																																																																																																																																																																																																																																																																																																			   de l'acheteur PayPal.</p>
+																																																																																																																																																																																																																																																																																																																																																													   de l'acheteur PayPal.</p>
 </article>
 <article class="grille-carte-texte">
 	<h1>6 000 000 de timbres</h1>
@@ -73,92 +70,108 @@
 <p>Incrivez-vous à notre info-lettre.
 </p>
 <p>Recevez en primeur nos timbres lots mis à l'enchère.</p>
-<form action="#" method="post" class="">
-	<input aria-label="email" type="email" name="email" placeholder="Votre adresse email">
-	<span class="btn">ABONNEZ-VOUS</span>
-</form></div></section><section class="carrousel margin-bt space"><h1>
-Les enchères sur le point de se terminer</h1><div class="carrousel-btn">
+{% if oUtilConn and enchere.utilisateur_id != oUtilConn.utilisateur_id %}
+	<form action="miseAjout" method="POST">
+		<input aria-label="text" type="text" name="montant" value="{{ mise.montant }}" placeholder="$">
+		<input type="hidden" name="date_mise" value="{{ mise.date_mise }}">
+		<input type="hidden" name="enchere_id" value="{{ enchere.enchere_id }}">
+		<input type="submit" value="Miser" class="caroussel-btn-lien">
+	</form>
+{% endif %}</div></section><section class="carrousel margin-bt space"><h1>
+Les coup de coeur du lord</h1><div class="carrousel-btn">
 <span class="prec-btn"><img src="assets/images/materialui-left.svg" width="32" height="32" alt="fleche qui point à gauche" class="survol"></span>
 <span class="suiv-btn "><img class="survol" src="assets/images/materialui.svg" width="32" height="32" alt="fleche qui point à droite"></span></div><div class="carrousel-conteneur">
 <div>
 	<img src="assets/images/t12.webp" loading="lazy" alt="Timbre rare avec homme de profil ">
 	<p class="timbre-name">Timbre Bleu de Lorraine</p>
 	<p class="timbre-price">800 000 $</p>
-	<form action="miseValidation" method="POST">
-		<input aria-label="text" type="text" name="text" placeholder="Montant de votre mise">
-		<input type="submit" value="MISER" class="caroussel-btn-lien">
-
-	</form>
+	{% if oUtilConn and enchere.utilisateur_id != oUtilConn.utilisateur_id %}
+		<form action="miseAjout" method="POST">
+			<input aria-label="text" type="text" name="montant" value="{{ mise.montant }}" placeholder="$">
+			<input type="hidden" name="date_mise" value="{{ mise.date_mise }}">
+			<input type="hidden" name="enchere_id" value="{{ enchere.enchere_id }}">
+			<input type="submit" value="Miser" class="caroussel-btn-lien">
+		</form>
+	{% endif %}
 </div>
 <div>
 	<img src="assets/images/s1.webp" loading="lazy" alt="Photo d'un timbre rare rouge avec femme de profil">
 	<p class="timbre-name">Timbre Deux-Siciles de 1859</p>
 	<p class="timbre-price">2 200 000 $</p>
-	<form action="miseValidation" method="POST">
-		<input aria-label="text" type="text" name="text" placeholder="Montant de votre mise">
-		<input type="submit" value="MISER" class="caroussel-btn-lien">
-
-	</form>
+	{% if oUtilConn and enchere.utilisateur_id != oUtilConn.utilisateur_id %}
+		<form action="miseAjout" method="POST">
+			<input aria-label="text" type="text" name="montant" value="{{ mise.montant }}" placeholder="$">
+			<input type="hidden" name="date_mise" value="{{ mise.date_mise }}">
+			<input type="hidden" name="enchere_id" value="{{ enchere.enchere_id }}">
+			<input type="submit" value="Miser" class="caroussel-btn-lien">
+		</form>
+	{% endif %}
 </div>
 <div>
 	<img src="assets/images/s2.webp" loading="lazy" alt="Timbre rare et vieux d'une dame">
 	<p class="timbre-name">Timbre du Cap de Bonne Espérance</p>
 	<p class="timbre-price">5 000 000 $</p>
-	<form action="miseValidation" method="POST">
-		<input aria-label="text" type="text" name="text" placeholder="Montant de votre mise">
-		<input type="submit" value="MISER" class="caroussel-btn-lien">
-
-	</form>
+	{% if oUtilConn and enchere.utilisateur_id != oUtilConn.utilisateur_id %}
+		<form action="miseAjout" method="POST">
+			<input aria-label="text" type="text" name="montant" value="{{ mise.montant }}" placeholder="$">
+			<input type="hidden" name="date_mise" value="{{ mise.date_mise }}">
+			<input type="hidden" name="enchere_id" value="{{ enchere.enchere_id }}">
+			<input type="submit" value="Miser" class="caroussel-btn-lien">
+		</form>
+	{% endif %}
 </div>
-<div>
-	<img src="assets/images/t15.webp" loading="lazy" alt="Photo d'un timbre rare">
-	<p class="timbre-name">Timbre de Hong Kong de 1862</p>
-	<p class="timbre-price">20 000 $ USD</p>
-	<span class="vignette-cote">Choix du Lord</span>
-	<form action="miseValidation" method="POST">
-		<input aria-label="text" type="text" name="text" placeholder="Montant de votre mise">
-		<input type="submit" value="MISER" class="caroussel-btn-lien">
 
-	</form>
-</div>
 <div>
 	<img src="assets/images/t1.webp" loading="lazy" alt="Photo d'un timbre rare bleu avec un homme qui regarde à de profil">
 	<p class="timbre-name">Timbre King George V Rouge</p>
 	<p class="timbre-price">600 $</p>
-	<form action="miseValidation" method="POST">
-		<input aria-label="text" type="text" name="text" placeholder="Montant de votre mise">
-		<input type="submit" value="MISER" class="caroussel-btn-lien">
-	</form>
+	{% if oUtilConn and enchere.utilisateur_id != oUtilConn.utilisateur_id %}
+		<form action="miseAjout" method="POST">
+			<input aria-label="text" type="text" name="montant" value="{{ mise.montant }}" placeholder="$">
+			<input type="hidden" name="date_mise" value="{{ mise.date_mise }}">
+			<input type="hidden" name="enchere_id" value="{{ enchere.enchere_id }}">
+			<input type="submit" value="Miser" class="caroussel-btn-lien">
+		</form>
+	{% endif %}
 </div>
 <div>
 	<img src="assets/images/s4.webp" loading="lazy" alt="Photo d'un timbre rare rouge">
 	<p class="timbre-name">Timbre Bavarois de 1849</p>
 	<p class="timbre-price">1 500 $</p>
-	<form action="miseValidation" method="POST">
-		<input aria-label="text" type="text" name="text" placeholder="Montant de votre mise">
-		<input type="submit" value="MISER" class="caroussel-btn-lien">
-
-	</form>
+	{% if oUtilConn and enchere.utilisateur_id != oUtilConn.utilisateur_id %}
+		<form action="miseAjout" method="POST">
+			<input aria-label="text" type="text" name="montant" value="{{ mise.montant }}" placeholder="$">
+			<input type="hidden" name="date_mise" value="{{ mise.date_mise }}">
+			<input type="hidden" name="enchere_id" value="{{ enchere.enchere_id }}">
+			<input type="submit" value="Miser" class="caroussel-btn-lien">
+		</form>
+	{% endif %}
 </div>
 <div>
 	<img src="assets/images/s3.webp" loading="lazy" alt="Photo d'un timbre rare de 1850">
 	<p class="timbre-name">Timbre Prussien de 1850</p>
 	<p class="timbre-price">2 000 $</p>
-	<form action="miseValidation" method="POST">
-		<input aria-label="text" type="text" name="text" placeholder="Montant de votre mise">
-		<input type="submit" value="MISER" class="caroussel-btn-lien">
-
-	</form>
+	{% if oUtilConn and enchere.utilisateur_id != oUtilConn.utilisateur_id %}
+		<form action="miseAjout" method="POST">
+			<input aria-label="text" type="text" name="montant" value="{{ mise.montant }}" placeholder="$">
+			<input type="hidden" name="date_mise" value="{{ mise.date_mise }}">
+			<input type="hidden" name="enchere_id" value="{{ enchere.enchere_id }}">
+			<input type="submit" value="Miser" class="caroussel-btn-lien">
+		</form>
+	{% endif %}
 </div>
 <div>
 	<img src="assets/images/t11.webp" loading="lazy" alt="Photo d'un timbre rare de 1943">
 	<p class="timbre-name">Timbre de la Confédération Suisse de 1843</p>
 	<p class="timbre-price">900 $</p>
-	<form action="miseValidation" method="POST">
-		<input aria-label="text" type="text" name="text" placeholder="Montant de votre mise">
-		<input type="submit" value="MISER" class="caroussel-btn-lien">
-
-	</form>
+	{% if oUtilConn and enchere.utilisateur_id != oUtilConn.utilisateur_id %}
+		<form action="miseAjout" method="POST">
+			<input aria-label="text" type="text" name="montant" value="{{ mise.montant }}" placeholder="$">
+			<input type="hidden" name="date_mise" value="{{ mise.date_mise }}">
+			<input type="hidden" name="enchere_id" value="{{ enchere.enchere_id }}">
+			<input type="submit" value="Miser" class="caroussel-btn-lien">
+		</form>
+	{% endif %}
 </div></div></section><div class="flex-convaincre space margin-bt"><article class="grille-carte-texte">
 <h1 class="">55000 utilisateurs</h1>
 <p>Rejoignez la communauté Stampee !

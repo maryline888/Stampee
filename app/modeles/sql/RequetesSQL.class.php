@@ -151,21 +151,13 @@ class RequetesSQL extends RequetesPDO
     return $this->CUDLigne($champs);
   }
 
-
   /**
-   * Afficher toutes les encheres  
+   * afficher encheres dans le simili-carrousel "encheres en cours"
    */
-
-  // public function afficherEncheres()
-  // {
-  // }
-  /**
-   * afficher image dans le simili-carrousel encheres en cours
-   */
-  public function afficherImages()
+  public function afficherEncheres()
   {
 
-    $this->sql = 'SELECT image_url, timbre.timbre_id, nom, enchere.enchere_id, enchere.date_fin, enchere.prix_plancher 
+    $this->sql = 'SELECT image_url, timbre.timbre_id, nom, enchere.enchere_id, enchere.date_fin, enchere.prix_plancher, enchere.utilisateur_id 
     FROM TIMBRE 
     JOIN IMAGE ON timbre.timbre_id = image.timbre_id 
     JOIN ENCHERE ON timbre.enchere_id = enchere.enchere_id 

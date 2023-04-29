@@ -101,39 +101,16 @@ class MiseModele
         return $this;
     }
 
-    // public function setMontant($montant)
-    // {
-    //     unset($this->erreurs['montant']);
-    //     $montant = strval($montant);
-    //     $montant = str_replace(',', '.', $montant);
-    //     $montant = (float)$montant;
-    //     if (!$montant) {
-    //         $this->erreurs['montant'] = "Veuillez inscrire un montant avant de miser";
-    //     }
-    //     $this->montant = $montant;
-    //     return $this;
-    // }
     public function setMontant($montant)
     {
         unset($this->erreurs['montant']);
-        $montant = filter_var($montant, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-        $montant = floatval(str_replace(',', '.', $montant));
+        $montant = strval($montant);
+        $montant = str_replace(',', '.', $montant);
+        $montant = (float)$montant;
         if (!$montant) {
             $this->erreurs['montant'] = "Veuillez inscrire un montant avant de miser";
         }
         $this->montant = $montant;
-        return $this;
-    }
-
-
-    public function setOffre_actuelle($offre_actuelle)
-    {
-        unset($this->offre_actuelle['offre_actuelle']);
-        // if (!$offre_actuelle) {
-        //     $this->erreurs['offre_actuelle'] = "Veuillez inscrire un montant avant de miser";
-        // }
-
-        $this->offre_actuelle = $offre_actuelle;
         return $this;
     }
 
